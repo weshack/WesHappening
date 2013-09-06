@@ -5,19 +5,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
 db = SQLAlchemy(app)
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
-
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-
-    def __repr__(self):
-        return '<User %r>' % self.username
-
-
 class Event(db.Model):
     __tablename__ = 'event'
     id = db.Column(db.Integer, primary_key=True)
@@ -84,6 +71,11 @@ def add_event(event):
     db.session.add(ev)
     db.session.commit()
 
+def delete_event(event):
+    ev = Event.query.filter_by(name=event).first()
+    if ev:
+        db.session.delete(ev)
+        db.session.commit()
 
 if __name__ == "__main__":
   app.debug = True
