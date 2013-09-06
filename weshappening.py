@@ -29,7 +29,7 @@ class Event(db.Model):
         self.category = category
 
     def __repr__(self):
-        return '<Event %r>' % self.name
+        return '<Event %s>' % self.name
 
 
 class Location(db.Model):
@@ -45,13 +45,13 @@ class Location(db.Model):
         self.addr = addr
 
     def __repr__(self):
-        return '<Location %r>' % self.name
+        return '<Location %s>' % self.name
 
 
 def serialize(locs):
     locations = []
     for loc in locs:
-       l = {'name': loc.name, 'lat':loc.lat, 'lon':loc.lon} 
+       l = {'name': loc.name, 'lat': 41.556, 'lon': -72.6576}
        locations.append(l)
     return simplejson.dumps(locations)
 
