@@ -9,3 +9,6 @@ def index():
 if __name__ == "__main__":
   app.debug = True
   app.run()
+
+
+# GOOGLE MAPS API KEY (goes in the url): key=AIzaSyAQpM8R-OLTmRM30bkfm1NOYyFiFSvn7kY

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,14 +7,13 @@
       body { height: 100%; margin: 0; padding: 0 }
       #map-canvas { height: 100% }
     </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=API_KEY&sensor=SET_TO_TRUE_OR_FALSE">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true">
     </script>
     <script type="text/javascript">
       function initialize() {
         var mapOptions = {
-          center: new google.maps.LatLng(-34.397, 150.644),
-          zoom: 8,
+          center: new google.maps.LatLng(41.5526833,-72.6612454),
+          zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -28,9 +26,5 @@
     <div id="map-canvas"/>
   </body>
 </html>
-=======
-{% extends "base.html" %}
-{% block content %}
-<h1>This is the index.html</h1>
-{% endblock %}
->>>>>>> b5b794000aba07e4d179572ea3af7754710c9e14
+
+https://www.google.com/maps/preview?authuser=0#!q=69+Fountain+Avenue%2C+69+Fountain+Ave%2C+Middletown%2C+CT+06457&data=!4m10!1m9!4m8!1m3!1d14602!2d-72.6612454!3d41.5526833!3m2!1i954!2i939!4f13.1
