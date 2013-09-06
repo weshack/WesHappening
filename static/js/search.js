@@ -1,1 +1,3 @@
-$(".event_search").chosen({no_results_text: "Nothing Happening :("});
+$(document).ready(function(){
+  $(".chosen-select").chosen({no_results_text: "Nothing Happening :("});
+});

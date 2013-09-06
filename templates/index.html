@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="/static/css/app.css" type="text/css">
     <link rel="stylesheet" href="/static/css/chosen.min.css" type="text/css">
 
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
     <script type="text/javascript" src="static/js/chosen.jquery.min.js"></script>
 
     <script type="text/javascript" src="/static/js/map.js"></script>
@@ -18,7 +20,7 @@
     <div id="search_bar">
       <h1 id="search_title" class="search">WesHappening</h1>
       <input id="event_search" type="text" placeholder="Search for a Happening" class="search"></input>
-      <select class="chosen" multiple="true" style="width:400px;">
+      <select class="chosen-select" multiple="true" style="width:400px;">
         {% for item in options %}
         <option>{{ item }}</option>
         {% endfor %}
@@ -27,4 +29,4 @@
   </body>
 </html>
 
-https://www.google.com/maps/preview?authuser=0#!q=69+Fountain+Avenue%2C+69+Fountain+Ave%2C+Middletown%2C+CT+06457&data=!4m10!1m9!4m8!1m3!1d14602!2d-72.6612454!3d41.5526833!3m2!1i954!2i939!4f13.1
+<!--https://www.google.com/maps/preview?authuser=0#!q=69+Fountain+Avenue%2C+69+Fountain+Ave%2C+Middletown%2C+CT+06457&data=!4m10!1m9!4m8!1m3!1d14602!2d-72.6612454!3d41.5526833!3m2!1i954!2i939!4f13.1-->
