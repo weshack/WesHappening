@@ -24,7 +24,7 @@ class Event(db.Model):
     name = db.Column(db.String(100))
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     location = db.relationship('Location') 
-    time = db.Column(db.Time)
+    time = db.Column(db.DateTime)
     link = db.Column(db.String(100))
     description = db.Column(db.Text)
     category = db.Column(db.Integer)
