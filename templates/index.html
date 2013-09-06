@@ -19,8 +19,7 @@
     <div id="map-canvas"></div>
     <div id="search_bar">
       <h1 id="search_title" class="search">WesHappening</h1>
-      <select class="event_search" style="width:400px;">
-        <option selected="selected">Search for an event by name</option>
+      <select class="event_search" multiple="true" style="width:400px;">
         {% for item in events %}
         <option>{{ item }}</option>
         {% endfor %}
