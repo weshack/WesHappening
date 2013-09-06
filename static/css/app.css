@@ -12,3 +12,13 @@ body {
   height: 100%
 }
 
+#search_bar {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+}
+
+#event_info {
+
+}
+
