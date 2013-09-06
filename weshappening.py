@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://:memory:'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
 db = SQLAlchemy(app)
 
 class User(db.Model):
