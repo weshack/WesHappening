@@ -52,7 +52,7 @@ class Location(db.Model):
 def serialize(locs):
     locations = []
     for loc in locs:
-       l = {"name": loc.name, "lat":loc.lat, "lon":loc.lon} 
+       l = {'name': loc.name, 'lat':loc.lat, 'lon':loc.lon} 
        locations.append(l)
     return json.dumps(locations)
 
