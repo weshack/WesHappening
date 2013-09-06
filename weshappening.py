@@ -54,7 +54,7 @@ def serialize(locs):
     for loc in locs:
        l = {"name": loc.name, "lat":loc.lat, "lon":loc.lon} 
        locations.append(l)
-    return locations
+    return json.dumps(locations)
 
 @app.route('/')
 def index():
