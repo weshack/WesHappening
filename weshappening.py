@@ -49,11 +49,17 @@ class Location(db.Model):
         return '<Location %r>' % self.name
 
 
-
+def serialize(locs):
+    locations = []
+    for loc in locs:
+       l = {"name": loc.name, "lat":loc.lat, "lon":loc.lon} 
+       locations.append(l)
+    return locations
 
 @app.route('/')
 def index():
-  locations = json.dumps(Location.query.all())
+#  locations = json.dumps(Location.query.all())
+  locations = serialize(Location.query.all())
   events = ['option_1','option_2','option_3','option_4']
   categories = ['cat 1','cat 2','cat 3']
   return render_template("index.html", locations = locations, events = events, categories = categories)
