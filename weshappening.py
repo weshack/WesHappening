@@ -63,7 +63,8 @@ class Location(db.Model):
 
 @app.route('/')
 def index():
- return render_template("index.html")
+ options = ['option_1','option_2','option_3','option_4']
+ return render_template("index.html", options = options)
 
 if __name__ == "__main__":
   app.debug = True
