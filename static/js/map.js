@@ -8,3 +8,7 @@ function initialize() {
       mapOptions);
 }
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+//search logic
