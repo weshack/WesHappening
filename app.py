@@ -5,6 +5,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlilte:////tmp/test.db'
 db = SQLAlchemy(app)
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -24,3 +25,6 @@ def index():
 if __name__ == "__main__":
   app.debug = True
   app.run()
+
+
+# GOOGLE MAPS API KEY (goes in the url): key=AIzaSyAQpM8R-OLTmRM30bkfm1NOYyFiFSvn7kY
