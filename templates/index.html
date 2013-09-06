@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="/static/css/app.css" type="text/css">
     <link rel="stylesheet" href="/static/css/chosen.min.css" type="text/css">
 
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
     <script type="text/javascript" src="static/js/chosen.jquery.min.js"></script>
 
     <script type="text/javascript" src="/static/js/map.js"></script>
@@ -18,7 +20,7 @@
     <div id="search_bar">
       <h1 id="search_title" class="search">WesHappening</h1>
       <input id="event_search" type="text" placeholder="Search for a Happening" class="search"></input>
-      <select class="chosen" multiple="true" style="width:400px;">
+      <select class="chosen-select" multiple="true" style="width:400px;">
         {% for item in options %}
         <option>{{ item }}</option>
         {% endfor %}
@@ -26,6 +28,3 @@
     <div id="event_info"></div>
   </body>
 </html>
-
-
-webcal://wesleying.org/?ec3_ical
