@@ -61,11 +61,14 @@ class Location(db.Model):
         return '<Location %r>' % self.name
 
 
+
+
 @app.route('/')
 def index():
- events = ['option_1','option_2','option_3','option_4']
- categories = ['cat 1','cat 2','cat 3']
- return render_template("index.html", events = events, categories = categories)
+  locations = Location.query.all()
+  events = ['option_1','option_2','option_3','option_4']
+  categories = ['cat 1','cat 2','cat 3']
+  return render_template("index.html", locations = locations, events = events, categories = categories)
 
 def add_event(event):
     name = event["name"]
