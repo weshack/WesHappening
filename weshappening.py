@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from pygeocoder import Geocoder
-import json
+import simplejson
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
@@ -53,11 +53,11 @@ def serialize(locs):
     for loc in locs:
        l = {'name': loc.name, 'lat':loc.lat, 'lon':loc.lon} 
        locations.append(l)
-    return json.dumps(locations)
+    return simplejson.dumps(locations)
 
 @app.route('/')
 def index():
-#  locations = json.dumps(Location.query.all())
+#  locations = simplejson.dumps(Location.query.all())
   locations = serialize(Location.query.all())
   events = ['option_1','option_2','option_3','option_4']
   categories = ['cat 1','cat 2','cat 3']
