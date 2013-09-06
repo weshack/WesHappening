@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
@@ -52,7 +53,7 @@ class Location(db.Model):
 
 @app.route('/')
 def index():
-  locations = Location.query.all()
+  locations = json.dumps(Location.query.all())
   events = ['option_1','option_2','option_3','option_4']
   categories = ['cat 1','cat 2','cat 3']
   return render_template("index.html", locations = locations, events = events, categories = categories)
