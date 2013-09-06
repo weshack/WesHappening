@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
+from pygeocoder import Geocoder
 import json
 
 app = Flask(__name__)
@@ -16,6 +17,8 @@ class Event(db.Model):
     link = db.Column(db.String(100))
     description = db.Column(db.Text)
     category = db.Column(db.Integer)
+    lat = db.Column(db.Float)
+    lon = db.Column(db.Float)
 
     def __init__(self, name, location, time, link, description, category):
         self.name = name
@@ -34,15 +37,11 @@ class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     short_name = db.Column(db.String(50))
-    lat = db.Column(db.Float)
-    lon = db.Column(db.Float)
     addr = db.Column(db.String(100))
 
-    def __init__(self, name, short_name, lat, lon, addr):
+    def __init__(self, name, short_name, addr):
         self.name = name
         self.short_name = short_name
-        self.lat = lat
-        self.lon = lon
         self.addr = addr
 
     def __repr__(self):
@@ -70,6 +69,7 @@ def add_event(event):
     location = Location.query.filter_by(name=loc).first()
     if not location:
         location = Location.query.filter_by(name="Undefined").first()
+    lat, lon = Geocoder.geocode(location.name + ", Middletown, CT, 06457").coordinates
     time = event["time"]
     link = event["link"]
     desc = event["description"]
