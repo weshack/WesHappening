@@ -67,6 +67,21 @@ def index():
  categories = ['cat 1','cat 2','cat 3']
  return render_template("index.html", events = events, categories = categories)
 
+def add_event(event):
+    name = event["name"]
+    loc = event["location"]
+    location = Location.query.filter_by(name=loc).first()
+    if not location:
+        location = Location.query.filter_by(name="Undefined").first()
+    time = event["time"]
+    link = event["link"]
+    desc = event["description"]
+    cat = event["category"]
+    ev = Event(name, location, time, link, desc, cat)
+    db.session.add(ev)
+    db.session.commit()
+
+
 if __name__ == "__main__":
   app.debug = True
   app.run()
