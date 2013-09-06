@@ -24,7 +24,7 @@ class Event(db.Model):
     name = db.Column(db.String(100))
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     location = db.relationship('Location') 
-    time = db.Column(db.Time)
+    time = db.Column(db.DateTime)
     link = db.Column(db.String(100))
     description = db.Column(db.Text)
     category = db.Column(db.Integer)
@@ -63,8 +63,9 @@ class Location(db.Model):
 
 @app.route('/')
 def index():
- options = ['option_1','option_2','option_3','option_4']
- return render_template("index.html", options = options)
+ events = ['option_1','option_2','option_3','option_4']
+ categories = ['cat 1','cat 2','cat 3']
+ return render_template("index.html", events = events, categories = categories)
 
 if __name__ == "__main__":
   app.debug = True
