@@ -19,10 +19,11 @@ class User(db.Model):
 
 
 class Event(db.Model):
+    __tablename__ = 'event'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    location = db.relationship('Location', 
-        backref=db.backref('event', lazy='dynamic'))
+    location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
+    location = db.relationship('Location') 
     time = db.Column(db.Time)
     link = db.Column(db.String(100))
     description = db.Column(db.Text)
@@ -41,6 +42,7 @@ class Event(db.Model):
 
 
 class Location(db.Model):
+    __tablename__ = 'location'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     short_name = db.Column(db.String(50))
