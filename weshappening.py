@@ -80,13 +80,6 @@ def query_name(pattern, d):
     patterns = pattern.split(" ")
     if d == "location":
         locs = Location.query.all()
-        #l = []
-        #for loc in locs:
-        #    if not (loc.name.find(pattern[0]) == -1):
-        #        l.append(loc)
-        #if len(l) == 1:
-        #    return l[0]
-        #elif len(l) > 1:
         for p in patterns:
             match = []
             for loc in locs:
@@ -97,13 +90,6 @@ def query_name(pattern, d):
         return locs[0]
     elif d == "event":
         evs = Event.query.all()
-        #e = []
-        #for ev in evs:
-        #    if not (ev.name.find(pattern[0]) == -1):
-        #        e.append(ev)
-        #if len(l) == 1:
-        #    return e[0]
-        #elif len(l) > 1:
         for p in patterns:
             match = []
             for ev in evs:
@@ -136,7 +122,10 @@ def add_event(event):
             lat, lon = (0.0, 0.0)
         else:
             loc = location
-            lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
+            try:
+                lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
+            except:
+                lat, lon = (41.5, -72/5)
         time = event["time"]
         link = event["link"]
         desc = event["description"]
