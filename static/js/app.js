@@ -29,3 +29,12 @@ function parse_locations(loc_str) {
 }
 
 //lat&#34;: 41.556, &#34;lon&#34;: -72.6576, &#34;name&#34;: &#34;Fauver Apartments&#34;
+
+function mark_locations(locs) {
+  var latLon = new google.maps.LatLng(locs[0][0],locs[0][1]);
+  var marker = new google.maps.Marker({
+      position: latLon,
+      map: map,
+      icon: image
+  });
+}
