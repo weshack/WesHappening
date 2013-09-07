@@ -63,13 +63,16 @@ def index():
   categories = ['cat 1','cat 2','cat 3']
   return render_template("index.html", locations = locations, events = events, categories = categories)
 
+
 def add_event(event):
     name = event["name"]
     loc = event["location"]
     location = Location.query.filter_by(name=loc).first()
     if not location:
         location = Location.query.filter_by(name="Undefined").first()
-    lat, lon = Geocoder.geocode(location.name + ", Middletown, CT, 06457").coordinates
+        lat, lon = (0.0, 0.0)
+    else:
+        lat, lon = Geocoder.geocode(location.name + ", Middletown, CT, 06457").coordinates
     time = event["time"]
     link = event["link"]
     desc = event["description"]
