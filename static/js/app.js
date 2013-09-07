@@ -27,3 +27,21 @@ function parse_locations(loc_str) {
   }
   return locs
 }
+
+function parse_events(event_str) {
+  //console.log(event_str);
+  var events = [];
+  arr = event_str.split("}, {");
+  for (var i=0;i<arr.length;i++) {
+    console.log(arr[i]);
+    var cat_re = /category&#34;: (\d),/;
+    var link_re = /link&#34;: &#34;(.+?(?=&#34;))/;
+
+    var cat_match = cat_re.exec(arr[i]);
+    console.log(cat_match[1]);
+    var link_match = link_re.exec(arr[i]);
+    console.log(link_match[1]);
+  }
+
+  return events
+}
