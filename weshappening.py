@@ -20,13 +20,15 @@ class Event(db.Model):
     lat = db.Column(db.Float)
     lon = db.Column(db.Float)
 
-    def __init__(self, name, location, time, link, description, category):
+    def __init__(self, name, location, time, link, description, category, lat=0.0, lon=0.0):
         self.name = name
         self.location = location
         self.time = time
         self.link = link
         self.description = description
         self.category = category
+        self.lat = lat
+        self.lon = lon
 
     def __repr__(self):
         return '<Event %s>' % self.name
@@ -35,7 +37,7 @@ class Event(db.Model):
 class Location(db.Model):
     __tablename__ = 'location'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), unique=True)
     short_name = db.Column(db.String(50))
     addr = db.Column(db.String(100))
 
@@ -55,11 +57,25 @@ def serialize(locs):
        locations.append(l)
     return simplejson.dumps(locations)
 
+        
+def serialize_events(events):
+    evs = []
+    for event in events:
+        ev = {'name': event.name, 'location': event.location,
+              'time': event.time, 'link': event.link,
+              'description': event.description,
+              'lat': event.lat, 'lon': event.lon,
+              'category': event.category}
+        evs.append(ev)
+    return simplejson.dumps(evs)
+
+
 @app.route('/')
 def index():
 #  locations = simplejson.dumps(Location.query.all())
   locations = serialize(Location.query.all())
-  events = ['option_1','option_2','option_3','option_4']
+  #events = ['option_1','option_2','option_3','option_4']
+  events = serialize(Events.query.all())
   categories = ['cat 1','cat 2','cat 3']
   return render_template("index.html", locations = locations, events = events, categories = categories)
 
@@ -68,9 +84,9 @@ def add_event(event):
     name = event["name"]
     if not Event.query.filter_by(name=name).first():
         loc = event["location"]
-        location = Location.query.filter_by(name=loc).first()
+        location = Location.query.filter(Location.name.startswith(loc)).first()
         if not location:
-            location = Location.query.filter_by(name="Undefined").first()
+            location = Location.query.filter_by(name="Unknown").first()
             lat, lon = (0.0, 0.0)
         else:
             lat, lon = Geocoder.geocode(location.name + ", Middletown, CT, 06457").coordinates
@@ -78,7 +94,7 @@ def add_event(event):
         link = event["link"]
         desc = event["description"]
         cat = event["category"]
-        ev = Event(name, location, time, link, desc, cat)
+        ev = Event(name, location, time, link, desc, cat, lat, lon)
         db.session.add(ev)
         db.session.commit()
 
