@@ -17,6 +17,16 @@ function initialize() {
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
   
+  //map.set('sytles', 
+  //    [
+  //      {
+  //        "featureType": "poi.school",
+  //        "stylers": [
+  //            { "visibility": "on" },
+  //            { "hue": "#ff0077" }
+  //          ]
+  //        }
+  //    ]);
   /* Adds markers for all events in 'events' to the map
    */
   var markers = [];
