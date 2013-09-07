@@ -53,7 +53,7 @@ class Location(db.Model):
 def serialize(locs):
     locations = []
     for loc in locs:
-       l = {'name': loc.name, 'lat': 41.556, 'lon': -72.6576}
+       l = {'name': loc.name}
        locations.append(l)
     return simplejson.dumps(locations)
 
@@ -72,6 +72,45 @@ def serialize_events(events):
     return simplejson.dumps(evs)
 
 
+## haha repeating searches need to clean
+def query_name(pattern, d):
+    patterns = pattern.split(" ")
+    if d == "location":
+        locs = Location.query.all()
+        l = []
+        for loc in locs:
+            if not (loc.name.find(pattern[0]) == -1):
+                l.append(loc)
+        if len(l) == 1:
+            return l[0]
+        elif len(l) > 1:
+            for p in patterns:
+                match = []
+                for i in l:
+                    if not (i.name.find(p) == -1):
+                        match.append(i)
+                if len(match) > 0:
+                    l = match
+            return l[0]
+    elif d == "event":
+        evs = Event.query.all()
+        e = []
+        for ev in evs:
+            if not (ev.name.find(pattern[0]) == -1):
+                e.append(ev)
+        if len(l) == 1:
+            return e[0]
+        elif len(l) > 1:
+            for p in patterns:
+                match = []
+                for i in e:
+                    if not (i.name.find(p) == -1):
+                        match.append(i)
+                if len(match) > 0:
+                    e = match
+            return e[0]
+    return None
+
 @app.route('/')
 def index():
 #  locations = simplejson.dumps(Location.query.all())
@@ -86,17 +125,20 @@ def add_event(event):
     name = event["name"]
     if not Event.query.filter_by(name=name).first():
         loc = event["location"]
-        location = Location.query.filter(Location.name.startswith(loc)).first()
+        #location = Location.query.filter(Location.name.startswith(loc)).first()
+        location = query_name(loc, "location")
+        print location
         if not location:
-            location = Location.query.filter_by(name="Unknown").first()
+            loc = Location.query.filter_by(name="Unknown").first()
             lat, lon = (0.0, 0.0)
         else:
-            lat, lon = Geocoder.geocode(location.name + ", Middletown, CT, 06457").coordinates
+            loc = location
+            lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
         time = event["time"]
         link = event["link"]
         desc = event["description"]
         cat = event["category"]
-        ev = Event(name, location, time, link, desc, cat, lat, lon)
+        ev = Event(name, loc, time, link, desc, cat, lat, lon)
         db.session.add(ev)
         db.session.commit()
 
