@@ -18,11 +18,16 @@ body {
   left: 100px;
 }
 
-.search {
-  position: relative;
-}
-
 #event_info {
-
+  position: absolute;
+  top: 50px;
+  right: 5px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  opacity: 0.5;
 }
-
+#even_info:hover {
+  opacity: 1;
+  width: 200px;
+  height: 600px;
+}
