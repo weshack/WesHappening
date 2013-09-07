@@ -52,6 +52,7 @@ function initialize() {
         '<h1 id="firstHeading" class="firstHeading">' + events[i].name + '</h1>'+
         '<div id="bodyContent">'+
         '<p>' + events[i].desc + '</p>' +
+        '<p>' + events[i].cat + '</p>' + 
         '<a href="' + events[i].link + '">Link</a>' +
         '</div>'+
         '</div>';
