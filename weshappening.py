@@ -1,22 +1,10 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
 db = SQLAlchemy(app)
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
-
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-
-    def __repr__(self):
-        return '<User %r>' % self.username
-
 
 class Event(db.Model):
     __tablename__ = 'event'
@@ -65,10 +53,30 @@ class Location(db.Model):
 
 @app.route('/')
 def index():
-  locations = Location.query.all()
+  locations = json.dumps(Location.query.all())
   events = ['option_1','option_2','option_3','option_4']
   categories = ['cat 1','cat 2','cat 3']
   return render_template("index.html", locations = locations, events = events, categories = categories)
+
+def add_event(event):
+    name = event["name"]
+    loc = event["location"]
+    location = Location.query.filter_by(name=loc).first()
+    if not location:
+        location = Location.query.filter_by(name="Undefined").first()
+    time = event["time"]
+    link = event["link"]
+    desc = event["description"]
+    cat = event["category"]
+    ev = Event(name, location, time, link, desc, cat)
+    db.session.add(ev)
+    db.session.commit()
+
+def delete_event(event):
+    ev = Event.query.filter_by(name=event).first()
+    if ev:
+        db.session.delete(ev)
+        db.session.commit()
 
 if __name__ == "__main__":
   app.debug = True
