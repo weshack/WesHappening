@@ -36,11 +36,16 @@ function parse_events(event_str) {
     console.log(arr[i]);
     var cat_re = /category&#34;: (\d),/;
     var link_re = /link&#34;: &#34;(.+?(?=&#34;))/;
+    var name_re = /name&#34;: &#34;(.+?(?=&#34;))/;
+    var lat_re = /&#/
 
     var cat_match = cat_re.exec(arr[i]);
     console.log(cat_match[1]);
     var link_match = link_re.exec(arr[i]);
     console.log(link_match[1]);
+    var name_match = name_re.exec(arr[i]);
+    console.log(name_match[1]);
+
   }
 
   return events
