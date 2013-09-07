@@ -20,37 +20,40 @@ function initialize() {
   
   /* Adds markers for all events in 'events' to the map
    */
+  var markers = [];
+
   for (var i=0;i<events.length;i++) {
-    var content_string = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">' + events[i].name + '</h1>'+
-      '<div id="bodyContent">'+
-      '<p>' + events[i].desc + '</p>' +
-      '<a href="' + events[i].link + '">Link</a>' +
-      '</div>'+
-      '</div>';
+    if (Math.floor(events[i].lat) == 41 && Math.ceil(events[i].lon) == -72) {
+      var content_string = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">' + events[i].name + '</h1>'+
+        '<div id="bodyContent">'+
+        '<p>' + events[i].desc + '</p>' +
+        '<a href="' + events[i].link + '">Link</a>' +
+        '</div>'+
+        '</div>';
 
-    var infowindow = new google.maps.InfoWindow( {
-      content: content_string
-    });
+      var marker = new google.maps.Marker( {
+        position: new google.maps.LatLng(events[i].lat, events[i].lon),
+        map: map,
+        title: events[i].name,
+      });
 
-    var marker = new google.maps.Marker( {
-      position: new google.maps.LatLng(events[i].lat, events[i].lon),
-      map: map,
-      title: events[i].name,
-    });
-
-    //marker.infowindow = new google.maps.InfoWindow({
-      //content: content_string
-    //});
-
-    google.maps.event.addListener(marker,'click', function() {
-      infowindow.open(map, marker);
-    });
-
+      marker.infowindow = new google.maps.InfoWindow({
+        content: content_string
+      });
+      markers.push(marker)
+    }
   }
-  
+  /* Adds event listeners to the markers
+   */
+  for (var i=0;i<markers.length;i++) {
+    google.maps.event.addListener(markers[i],'click', function() {
+      markers[i].infowindow.open(map,markers[i]);
+    });
+  }
+
   //adds options to the three search bars
   var loc_names = [];
   for (var i=0;i<locs.length;i++) {
