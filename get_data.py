@@ -1,8 +1,29 @@
 from xml.dom import minidom
 import urllib2
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 import datetime
 import re
+
+def time_parser(time_string):
+	x_to_z = re.compile('[\d]{2}(am|pm).*[\d]{1,2}(am|pm)')
+	c1 = x_to_z.findall(p1,re.I)
+	print c1
+	if c1:
+		time = c1[0]
+		first = re.compile('[\d]{1,2}')
+		start = int(first.findall(time)[0])
+		print start
+		am_pm = re.compile('(am|pm)')
+		to_24 = am_pm.findall(time)[0]
+		if to_24 == 'pm':
+			start += 12
+
+		end = re.compile
+
+		#make sure to handle an event that has an AM that goes to the next day
+		#handle 10:XX - YY:ZZ
+		print time
+
 
 def xml_parser():
 	"""FOR WESLEYING"""
@@ -18,12 +39,14 @@ def xml_parser():
 		description = i.getElementsByTagName('description')[0].childNodes[0].data
 		content_html = i.getElementsByTagName('content:encoded')[0].childNodes[0].data
 		parsed_content = BeautifulSoup(content_html)
-		full_description = parsed_content.find('blockquote').text
-
+		print parsed_content
+		try:
+			full_description = parsed_content.find('blockquote').text
+		except:
+			full_description = ""
 		info = parsed_content('p')[3]
 		print info,"INFO"
 		times = ['time']
-		print type(times)
 		dates = ['date']
 		locations = ['place','where?','location','where']
 
@@ -36,7 +59,13 @@ def xml_parser():
 		for t in times:
 			print t
 			if t in info_str:
-				event_time = t
+				c = re.compile(t+'.*?<.*?<',re.I)
+				p = c.findall(info_str)[0]
+				print p,"P!!!!!!!1"
+				c2 = re.compile('>.*<')
+				p2 = c2.findall(p)[0][1:-1]
+				print p2,"P2!!!!!"
+				event_time = ""
 				break
 
 		for t in dates:
@@ -50,6 +79,10 @@ def xml_parser():
 				break
 
 		print event_location,event_time,event_date,"Stuff"
+
+
+		soup = BeautifulSoup(content_html)
+		soup.find_all("p")[3].get_text('|').split('|')
 
 		#HOW THE HELL DO I DO MULTIPLE OPTIONS...
 		# p1 = re.compile('Place:.*</p>')
