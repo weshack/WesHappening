@@ -20,7 +20,7 @@ function initialize() {
   
   /* Adds markers for all events in 'events' to the map
    */
-  for (var i=0;i<2;i++) {
+  for (var i=0;i<events.length;i++) {
     var content_string = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
