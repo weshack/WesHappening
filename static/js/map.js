@@ -4,10 +4,17 @@ function initialize() {
     zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     minZoom: 12,
-    draggable: false
+    draggable: false,
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
+
+  var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(41.555690, -72.657589),
+      map: map,
+      title:"Hello",
+  });
+  marker.setMap(map);
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
