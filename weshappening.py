@@ -123,10 +123,13 @@ def add_event(event):
             lat, lon = (0.0, 0.0)
         else:
             loc = location
-            try:
-                lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
-            except:
-                lat, lon = (41.5, -72.5)
+            if loc.addr == "":
+                lat, lon = (0.0, 0.0)
+            else:
+                try:
+                    lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
+                except:
+                    lat, lon = (41.5, -72.5)
         time = event["time"]
         link = event["link"]
         desc = event["description"]

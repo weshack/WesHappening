@@ -48,7 +48,7 @@ function initialize() {
   /* Adds events to map
    */
   for (var i=0;i<events.length;i++) {
-    if (Math.floor(events[i].lat) == 41 && Math.ceil(events[i].lon) == -72) {
+    if ((events[i].lat) != 0.0 && (events[i].lon) != 0.0) {
 
       var content_str = '<div id="content">'+
         '<div id="siteNotice">'+
