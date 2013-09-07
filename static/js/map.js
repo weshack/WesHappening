@@ -18,23 +18,17 @@ function initialize() {
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
 
-  var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(41.555690, -72.657589),
-      map: map,
-      title:"Hello",
-  });
-
-  /*
+  /* locations
    * Marks locations on the map. The input must be an array of 
    * objects with lat, lon, name attributes
-   */
-  console.log(locs);
-  console.log(locs[0]);
-  console.log(locs[0].lat);
+   *
+  //console.log(locs);
+  //console.log(locs[0]);
+  //console.log(locs[0].lat);
   for (var i=0;i<locs.length;i++) {
-    console.log('LATITUDE:'+locs[i].lat);
-    console.log('LONGITUDE:'+locs[i].lon);
-    console.log('NAME:'+locs[i].name);
+    //console.log('LATITUDE:'+locs[i].lat);
+    //console.log('LONGITUDE:'+locs[i].lon);
+    //console.log('NAME:'+locs[i].name);
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(locs[i].lat, locs[i].lon),
       map: map,
@@ -42,6 +36,7 @@ function initialize() {
     });
     marker.setMap(map);
   }
+  */
   
   //adds options to the three search bars
   var loc_names = [];

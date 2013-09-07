@@ -61,8 +61,10 @@ def serialize(locs):
 def serialize_events(events):
     evs = []
     for event in events:
-        ev = {'name': event.name, 'location': event.location,
-              'time': event.time, 'link': event.link,
+        time = '%s,%s,%s,%s,%s' % (event.time.year, event.time.month, event.time.day, event.time.hour, event.time.minute)
+
+        ev = {'name': event.name, 'location': serialize([event.location]),
+              'time': time, 'link': event.link,
               'description': event.description,
               'lat': event.lat, 'lon': event.lon,
               'category': event.category}
@@ -75,7 +77,7 @@ def index():
 #  locations = simplejson.dumps(Location.query.all())
   locations = serialize(Location.query.all())
   #events = ['option_1','option_2','option_3','option_4']
-  events = serialize(Events.query.all())
+  events = serialize_events(Event.query.all())
   categories = ['cat 1','cat 2','cat 3']
   return render_template("index.html", locations = locations, events = events, categories = categories)
 
