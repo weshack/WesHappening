@@ -10,11 +10,11 @@ db = SQLAlchemy(app)
 class Event(db.Model):
     __tablename__ = 'event'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), unique=True)
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     location = db.relationship('Location') 
     time = db.Column(db.DateTime)
-    link = db.Column(db.String(100))
+    link = db.Column(db.String(200))
     description = db.Column(db.Text)
     category = db.Column(db.Integer)
     lat = db.Column(db.Float)
@@ -66,20 +66,21 @@ def index():
 
 def add_event(event):
     name = event["name"]
-    loc = event["location"]
-    location = Location.query.filter_by(name=loc).first()
-    if not location:
-        location = Location.query.filter_by(name="Undefined").first()
-        lat, lon = (0.0, 0.0)
-    else:
-        lat, lon = Geocoder.geocode(location.name + ", Middletown, CT, 06457").coordinates
-    time = event["time"]
-    link = event["link"]
-    desc = event["description"]
-    cat = event["category"]
-    ev = Event(name, location, time, link, desc, cat)
-    db.session.add(ev)
-    db.session.commit()
+    if not Event.query.filter_by(name=name).first():
+        loc = event["location"]
+        location = Location.query.filter_by(name=loc).first()
+        if not location:
+            location = Location.query.filter_by(name="Undefined").first()
+            lat, lon = (0.0, 0.0)
+        else:
+            lat, lon = Geocoder.geocode(location.name + ", Middletown, CT, 06457").coordinates
+        time = event["time"]
+        link = event["link"]
+        desc = event["description"]
+        cat = event["category"]
+        ev = Event(name, location, time, link, desc, cat)
+        db.session.add(ev)
+        db.session.commit()
 
 def delete_event(event):
     ev = Event.query.filter_by(name=event).first()
