@@ -63,7 +63,7 @@ def serialize_events(events):
     for event in events:
         time = '%s,%s,%s,%s,%s' % (event.time.year, event.time.month, event.time.day, event.time.hour, event.time.minute)
 
-        ev = {'name': event.name, 'location': serialize([event.location]),
+        ev = {'name': event.name, 'location': event.location.name,
               'time': time, 'link': event.link,
               'description': event.description,
               'lat': event.lat, 'lon': event.lon,
