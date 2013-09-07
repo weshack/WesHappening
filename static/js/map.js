@@ -5,7 +5,7 @@ function initialize() {
    */
   function add_options(selector, options) {
     for (var i=0;i<options.length;i++) {
-      $(selector).append("<option>"+options[i]+"<\\options>");    }
+      $(selector).append("<option>"+options[i]+"</options>");    }
   };
 
   var mapOptions = {
@@ -15,9 +15,9 @@ function initialize() {
     minZoom: 12,
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
-      mapOptions);
-  
-  /* Adds markers for all events in 'events' to the map
+       mapOptions);
+    
+  /*a Adds markers for all events in 'events' to the map
    */
   var markers = [];
 
@@ -71,11 +71,18 @@ function initialize() {
   }
 
   //adds options to the three search bars
-  var loc_names = [];
-  for (var i=0;i<locs.length;i++) {
-    loc_names.push(locs[i].name);
+
+  //var loc_names = [];
+  //for (var i=0;i<locs.length;i++) {
+  //  loc_names.push(locs[i].name);
+  //}
+  //add_options('#location_search',loc_names);
+
+  var event_names = [];
+  for (var i=0;i<events.length;i++) {
+    event_names.push(events[i].name);
   }
-  add_options('#location_search',loc_names);
+  add_options("#event_search",event_names);
 
   /*
    * Makes search bars pretty using the chosen framework
