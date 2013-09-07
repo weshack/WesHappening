@@ -36,4 +36,5 @@ function mark_locations(locs) {
       icon: image
   });
 }
+//
 */
