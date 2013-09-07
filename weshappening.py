@@ -72,25 +72,44 @@ def serialize_events(events):
     return simplejson.dumps(evs)
 
 
+## haha repeating searches need to clean
 def query_name(pattern, d):
+    patterns = pattern.split(" ")
     if d == "location":
         locs = Location.query.all()
         l = []
         for loc in locs:
-            if not (loc.name.find(pattern) == -1):
+            if not (loc.name.find(pattern[0]) == -1):
                 l.append(loc)
-        if not (len(l) == 0):
-            return l
+        if len(l) == 1:
+            return l[0]
+        elif len(l) > 1:
+            for p in patterns:
+                match = []
+                for i in l:
+                    if not (i.name.find(p) == -1):
+                        match.append(i)
+                if len(match) > 0:
+                    l = match
+            return l[0]
     elif d == "event":
         evs = Event.query.all()
         e = []
         for ev in evs:
-            if not (ev.name.find(pattern) == -1):
+            if not (ev.name.find(pattern[0]) == -1):
                 e.append(ev)
-        if not (len(l) == 0):
-            return e
-    else:
-        return None
+        if len(l) == 1:
+            return e[0]
+        elif len(l) > 1:
+            for p in patterns:
+                match = []
+                for i in e:
+                    if not (i.name.find(p) == -1):
+                        match.append(i)
+                if len(match) > 0:
+                    e = match
+            return e[0]
+    return None
 
 @app.route('/')
 def index():
@@ -107,13 +126,13 @@ def add_event(event):
     if not Event.query.filter_by(name=name).first():
         loc = event["location"]
         #location = Location.query.filter(Location.name.startswith(loc)).first()
-        location = query_name(loc.split(" ")[0], "location")
+        location = query_name(loc, "location")
         print location
         if not location:
             loc = Location.query.filter_by(name="Unknown").first()
             lat, lon = (0.0, 0.0)
         else:
-            loc = location[0]
+            loc = location
             lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
         time = event["time"]
         link = event["link"]
