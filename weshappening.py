@@ -53,7 +53,7 @@ class Location(db.Model):
 def serialize(locs):
     locations = []
     for loc in locs:
-       l = {'name': loc.name, 'lat': 41.556, 'lon': -72.6576}
+       l = {'name': loc.name}
        locations.append(l)
     return simplejson.dumps(locations)
 
@@ -72,6 +72,26 @@ def serialize_events(events):
     return simplejson.dumps(evs)
 
 
+def query_name(pattern, d):
+    if d == "location":
+        locs = Location.query.all()
+        l = []
+        for loc in locs:
+            if not (loc.name.find(pattern) == -1):
+                l.append(loc)
+        if not (len(l) == 0):
+            return l
+    elif d == "event":
+        evs = Event.query.all()
+        e = []
+        for ev in evs:
+            if not (ev.name.find(pattern) == -1):
+                e.append(ev)
+        if not (len(l) == 0):
+            return e
+    else:
+        return None
+
 @app.route('/')
 def index():
 #  locations = simplejson.dumps(Location.query.all())
@@ -86,17 +106,20 @@ def add_event(event):
     name = event["name"]
     if not Event.query.filter_by(name=name).first():
         loc = event["location"]
-        location = Location.query.filter(Location.name.startswith(loc)).first()
+        #location = Location.query.filter(Location.name.startswith(loc)).first()
+        location = query_name(loc.split(" ")[0], "location")
+        print location
         if not location:
-            location = Location.query.filter_by(name="Unknown").first()
+            loc = Location.query.filter_by(name="Unknown").first()
             lat, lon = (0.0, 0.0)
         else:
-            lat, lon = Geocoder.geocode(location.name + ", Middletown, CT, 06457").coordinates
+            loc = location[0]
+            lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
         time = event["time"]
         link = event["link"]
         desc = event["description"]
         cat = event["category"]
-        ev = Event(name, location, time, link, desc, cat, lat, lon)
+        ev = Event(name, loc, time, link, desc, cat, lat, lon)
         db.session.add(ev)
         db.session.commit()
 
