@@ -34,9 +34,14 @@ function initialize() {
       content: content_str,
     });
 
-    google.maps.event.addListener(marker,'click',function() {
+    google.maps.event.addListener(marker,'mouseover',function() {
       infowindow.open(map,marker);
     });
+
+    google.maps.event.addListener(marker,'mouseout',function() {
+      infowindow.close();
+    });
+
     return marker;
   }
 
