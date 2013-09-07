@@ -6,17 +6,17 @@ function parse_locations(loc_str) {
   loc_str.replace(/&#34;/g,"'");
   arr = loc_str.split("}, {");
   for (var i=0;i<arr.length;i++) {
-    console.log(arr[i]);
+    //console.log(arr[i]);
     var lat_re = /lat&#34;: (\d+.\d+)/;
-    var lon_re = /lon&#34;: (-\d+.\d+)/;
+    var lon_re = /lon&#34;: (-?\d+.\d+)/;
     var name_re = /name&#34;: &#34;([\w\s]+)/;
 
     var lat_match = lat_re.exec(arr[i]);
-    console.log(lat_match[1]);
+    //console.log(lat_match[1]);
     var lon_match = lon_re.exec(arr[i]);
-    console.log(lon_match[1]);
+    //console.log(lon_match[1]);
     var name_match = name_re.exec(arr[i]);
-    console.log(name_match[1]);
+    //console.log(name_match[1]);
 
     var obj = new Object();
     obj.lat = lat_match[1];
@@ -27,14 +27,43 @@ function parse_locations(loc_str) {
   }
   return locs
 }
-/*
-function mark_locations(locs) {
-  var latLon = new google.maps.LatLng(locs[0][0],locs[0][1]);
-  var marker = new google.maps.Marker({
-      position: latLon,
-      map: map,
-      icon: image
-  });
+
+function parse_events(event_str) {
+  //console.log(event_str);
+  var events = [];
+  arr = event_str.split("}, {");
+  for (var i=0;i<arr.length;i++) {
+    //console.log(arr[i]);
+    var cat_re = /category&#34;: (\d),/;
+    var link_re = /link&#34;: &#34;(.+?(?=&#34;))/;
+    var name_re = /name&#34;: &#34;(.+?(?=&#34;))/;
+    var desc_re = /description&#34;: &#34;(.+?(?=&#34;))/
+    var lat_re = /lat&#34;: (\d+.\d+)/;
+    var lon_re = /lon&#34;: (-?\d+.\d+)/;
+
+    var cat_match = cat_re.exec(arr[i]);
+    //console.log(cat_match[1]);
+    var link_match = link_re.exec(arr[i]);
+    //console.log(link_match[1]);
+    var name_match = name_re.exec(arr[i]);
+    //console.log(name_match[1]);
+    var desc_match = desc_re.exec(arr[i]);
+    //console.log(desc_match[1]);
+    var lat_match = lat_re.exec(arr[i]);
+    //console.log(lat_match[1]);
+    var lon_match = lon_re.exec(arr[i]);
+    //console.log(lon_match[1]);
+    
+    var obj = new Object();
+    obj.cat = cat_match[1];
+    obj.link = link_match[1];
+    obj.name = name_match[1];
+    obj.desc = desc_match[1];
+    obj.lat = lat_match[1];
+    obj.lon = lon_match[1];
+
+    events.push(obj);
+  }
+
+  return events
 }
-//
-*/

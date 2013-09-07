@@ -11,33 +11,22 @@
     <script type="text/javascript" src="static/js/chosen.jquery.min.js"></script>
 
     <script type="text/javascript" src="/static/js/app.js"></script>
-    <script type="text/javascript" src="/static/js/map.js"></script>
-    <script type="text/javascript" src="/static/js/search.js"></script>
-    <script type="text/javascript" src="/static/js/sliderbox.js"></script>
     <script type="text/javascript">
-      var locs = parse_locations("{{ locations }}");
-      //mark_locations(locs);
+      //var locs = parse_locations("{{ locations }}");
+      var locs = [];
+      var events = parse_events("{{ events }}");
     </script>
+    <script type="text/javascript" src="/static/js/map.js"></script>
 
   </head>
   <body>
     <div id="map-canvas"></div>
     <div id="search_bar">
-      <h1 id="search_title" class="search">WesHappening</h1>
       <select id="event_search" multiple="true" style="width:400px;">
-        {% for item in events %}
-        <option>{{ item }}</option>
-        {% endfor %}
       </select>
       <select id="category_search" multiple="true" style="width:200px;">
-        {% for item in categories %}
-        <option>{{ item }}</option>
-        {% endfor %}
       </select>
       <select id="location_search" multiple="true" style="width:200px;">
-        {% for item in locations %}
-        <option>{{ item.name }}</option>
-        {% endfor %}
       </select>
     </div>
     <div title="Show panel" id="event_info">

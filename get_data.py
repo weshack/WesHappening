@@ -38,12 +38,12 @@ def unicode_hack(unicodey_string):
             word += i
     return word
 
-def content_parser(content=None):
+def content_parser(content,identifiers):
     """
     Content is a list of words and identifiers is a dict of lists
     """
 
-    identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:","Place"]}
+  
     # content = [u'1962.', u'USA.', u'Dir:', u'John', u'Ford.', u'With', u'James', u'Stewart,', u'John', u'Wayne.', u'123', u'min.', u'In', u'a', u'town', u'terrorized', u'by', u'the', u'titular', u'outlaw,', u'an', u'educated', u'lawyer', u'and', u'an', u'individualistic', u'frontiersman', u'strike', u'up', u'uneasy', u'friendship', u'in', u'the', u'name', u'of', u'peace', u'and', u'progress.', u'Western', u'master', u'Ford', u'uses', u'flashbacks', u'to', u'detail', u'a', u'thrilling,', u'cynically', u'self-reflexive', u'commentary', u'on', u'American', u'mythology.', u'Tonight.', u'8pm.', u'Goldsmith', u'Family', u'Cinema.', u'Free.']
     # content = [u'\n', u'From ', u'Keenan Burgess\u201916', u':', u'\n', u'Electronic up-and-comer ', u'Druid Cloak\u2019s', u' coming to Psi U this Saturday for the first party/concert of the fall semester. Wes\u2019 own Ron Beatz and cone+ will be opening.', u'\n', u'Date:', u' Sat, Sept 7', u'\n', u'Time: \xa0', u'9 pm- 2 am', u'\n', u'Place:', u' Psi U', u'\n', u'Cost:', u' FREE', u'\n', u'FB Event.', u'\n']
 
@@ -73,8 +73,26 @@ def content_parser(content=None):
             # if curr_list:
             #     info_list.append(curr_list)
         index += 1
-        
-    return info_list
+    if info_list:
+        return info_list
+
+def content_builder(content,identifiers,matches):
+    """
+    Builds list of associated content from list based on given subset/indexes of matches 
+    """
+    identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:","Place"]}
+    inverse_dict = {}
+    for i in identifiers:
+        for z in identifiers[i]
+            inverse_dict[z] = i
+
+    print inverse_dict,"INVERSE"
+
+    event = {}
+    for m in matches:
+        if m[0] in inverse_dict:
+            
+
 
 # import get_data;a = get_data.xml_parser();b = get_data.content_parser(a)
 def get_xml():
@@ -91,7 +109,7 @@ def xml_parser():
     items = get_xml()
     events = []
     # print items,"ITEMS"
-    for i in items[0:3]:
+    for i in items[0:1]:
         print i,"ITEM"
         title = i.getElementsByTagName('title')[0].childNodes[0].data
         url = i.getElementsByTagName('link')[0].childNodes[0].data
@@ -138,15 +156,22 @@ def xml_parser():
         #       break
 
         # print event_location,event_time,event_date,"Stuff"
-
+        identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:","Place"]}
         soup = BeautifulSoup(content_html)
-        print '\/n',soup,"SOOOOOOOOOOUP"
-        print "CONTENT",content_html,"END CONTENT"
+        # print '\/n',soup,"SOOOOOOOOOOUP"
+        # print "CONTENT",content_html,"END CONTENT"
         info = soup.get_text('|').split('|')
-        print info,"INFO"
-        content = content_parser(info)
-
-        events.append(content)
+        # print info,"INFO"
+        content = content_parser(info,identifiers)
+        if content:
+            
+            ##DO MORE THINGS
+            built = content_builder(content)
+            event = "those things thing"
+        else:
+            event = {"title":title,"url":url,"description":description,
+                "location":event_location,"time":event_time,
+                "date":event_date,"full_description":full_description}
 
         #HOW THE HELL DO I DO MULTIPLE OPTIONS...
         # p1 = re.compile('Place:.*</p>')
@@ -163,5 +188,6 @@ def xml_parser():
         #         "date":event_date}
 
         # events.append(event)
+        events.append(events)
 
     return events
