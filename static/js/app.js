@@ -50,7 +50,15 @@ function parse_events(event_str) {
     console.log(lat_match[1]);
     var lon_match = lon_re.exec(arr[i]);
     console.log(lon_match[1]);
+    
+    var obj = new Object();
+    obj.cat = cat_match[1];
+    obj.link = link_match[1];
+    obj.name = name_match[1];
+    obj.lat = lat_match[1];
+    obj.lon = lon_match[1];
 
+    events.push(obj);
   }
 
   return events
