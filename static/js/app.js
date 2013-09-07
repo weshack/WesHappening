@@ -8,7 +8,7 @@ function parse_locations(loc_str) {
   for (var i=0;i<arr.length;i++) {
     //console.log(arr[i]);
     var lat_re = /lat&#34;: (\d+.\d+)/;
-    var lon_re = /lon&#34;: (-\d+.\d+)/;
+    var lon_re = /lon&#34;: (-?\d+.\d+)/;
     var name_re = /name&#34;: &#34;([\w\s]+)/;
 
     var lat_match = lat_re.exec(arr[i]);
@@ -37,7 +37,8 @@ function parse_events(event_str) {
     var cat_re = /category&#34;: (\d),/;
     var link_re = /link&#34;: &#34;(.+?(?=&#34;))/;
     var name_re = /name&#34;: &#34;(.+?(?=&#34;))/;
-    var lat_re = /&#/
+    var lat_re = /lat&#34;: (\d+.\d+)/;
+    var lon_re = /lon&#34;: (-?\d+.\d+)/;
 
     var cat_match = cat_re.exec(arr[i]);
     console.log(cat_match[1]);
@@ -45,6 +46,10 @@ function parse_events(event_str) {
     console.log(link_match[1]);
     var name_match = name_re.exec(arr[i]);
     console.log(name_match[1]);
+    var lat_match = lat_re.exec(arr[i]);
+    console.log(lat_match[1]);
+    var lon_match = lon_re.exec(arr[i]);
+    console.log(lon_match[1]);
 
   }
 
