@@ -17,26 +17,39 @@ function initialize() {
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
+  
+  /* Adds markers for all events in 'events' to the map
+   */
+  for (var i=0;i<2;i++) {
+    var content_string = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">' + events[i].name + '</h1>'+
+      '<div id="bodyContent">'+
+      '<p>' + events[i].desc + '</p>' +
+      '<a href="' + events[i].link + '">Link</a>' +
+      '</div>'+
+      '</div>';
 
-  /* locations
-   * Marks locations on the map. The input must be an array of 
-   * objects with lat, lon, name attributes
-   *
-  //console.log(locs);
-  //console.log(locs[0]);
-  //console.log(locs[0].lat);
-  for (var i=0;i<locs.length;i++) {
-    //console.log('LATITUDE:'+locs[i].lat);
-    //console.log('LONGITUDE:'+locs[i].lon);
-    //console.log('NAME:'+locs[i].name);
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(locs[i].lat, locs[i].lon),
-      map: map,
-      title:locs[i].name,
+    var infowindow = new google.maps.InfoWindow( {
+      content: content_string
     });
-    marker.setMap(map);
+
+    var marker = new google.maps.Marker( {
+      position: new google.maps.LatLng(events[i].lat, events[i].lon),
+      map: map,
+      title: events[i].name,
+    });
+
+    //marker.infowindow = new google.maps.InfoWindow({
+      //content: content_string
+    //});
+
+    google.maps.event.addListener(marker,'click', function() {
+      infowindow.open(map, marker);
+    });
+
   }
-  */
   
   //adds options to the three search bars
   var loc_names = [];
@@ -59,4 +72,24 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
 
-//search logic
+
+  /* locations
+   * Marks locations on the map. The input must be an array of 
+   * objects with lat, lon, name attributes
+   *
+  //console.log(locs);
+  //console.log(locs[0]);
+  //console.log(locs[0].lat);
+  for (var i=0;i<locs.length;i++) {
+    //console.log('LATITUDE:'+locs[i].lat);
+    //console.log('LONGITUDE:'+locs[i].lon);
+    //console.log('NAME:'+locs[i].name);
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locs[i].lat, locs[i].lon),
+      map: map,
+      title:locs[i].name,
+    });
+    marker.setMap(map);
+  }
+  */
+
