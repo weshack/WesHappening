@@ -3,6 +3,7 @@ import re
 import datetime
 from weshappening import add_event
 from get_data import xml_parser
+from time import sleep
 
 feed_url = "http://events.wesleyan.edu/events/cal_rss_today"
 
@@ -41,6 +42,7 @@ for item in feed["items"]:
     event = {"name": name, "location": loc, "time": dt, "link": link, "description": desc, "category":cat}
 
     add_event(event)
+    sleep(1)
 
 
 
@@ -51,14 +53,12 @@ for item in wesleying_feed[0:1]:
     date = str(item["date"])
     time = re.search("(TBA|\d\d:\d\d (a|p)m( - \d\d:\d\d (a|p)m)*)", str(item['time']))
     time = item["time"]
-    print item
-    print date,"Date"
     #this removes some unicode characters that I can't
     #seem to convert to ascii. Therefore grammar=messy
-    desc = item['description'].encode('ascii','ignore')
+    desc = item['description'].encode('ascii','ignore')[0:10]
     loc = str(item["location"][0]) #0 for now..()
 
-    print loc,type(loc)
+    print loc
     link = str(item['url'])
 
     try:
@@ -78,7 +78,8 @@ for item in wesleying_feed[0:1]:
     cat = ite % 4
     ite += 1
     
-    event = {"name": name, "location": loc, "time":datetime.datetime(2013,9,7,18,00) , "link": link, "description": desc, "category":cat}
+    event = {"name": name, "location": loc, "time":datetime.datetime(2013,9,7,18,00) , 
+            "link": link, "description": desc, "category":cat}
 
     print event,"EVENT"
     add_event(event)
