@@ -57,13 +57,6 @@ function initialize() {
     oms.addMarker(marker);
 
 
-    $(window).on('hashchange', function() {
-  .. work ..
-});n()
-    window.onload = function(){
-          infowindow.open(map,marker);
-        
-    }
 
     return marker;
   }
