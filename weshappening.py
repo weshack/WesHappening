@@ -3,6 +3,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from pygeocoder import Geocoder
 import simplejson
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
 db = SQLAlchemy(app)
