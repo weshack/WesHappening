@@ -37,11 +37,6 @@ function initialize() {
       content: content_str,
     });
 
-    oms.addListener('click', function(marker, event) {
-        infowindow.setContent(marker.desc);
-        infowindow.open(map, marker);
-    });
-
     oms.addListener('spiderfy', function(markers) {
         infowindow.close();
     });

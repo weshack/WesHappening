@@ -1,0 +1,8 @@
+#! /usr/bin/python
+from weshappening import db, Event, Location, delete_event, add_event
+from subprocess import call
+
+for ev in Event.query.all():
+    delete_event(ev.name)
+
+call(["./feed"])

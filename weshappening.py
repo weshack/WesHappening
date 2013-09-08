@@ -5,7 +5,7 @@ import simplejson
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///events.db'
 db = SQLAlchemy(app)
 
 cats = {0: "Auditions",  1: "Theater", 2: "Sports", 
@@ -76,7 +76,6 @@ def serialize_events(events):
     return simplejson.dumps(evs)
 
 
-## haha repeating searches need to clean
 def query_name(pattern, d):
     patterns = pattern.split(" ")
     if d == "location":
@@ -130,13 +129,13 @@ def add_event(event):
                 try:
                     lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
                 except:
-                    lat, lon = (41.5, -72.5)
+                    lat, lon = (41.5555, -72.6575)
         time = event["time"]
         link = event["link"]
         desc = event["description"]
         cat = event["category"]
         ev = Event(name, loc, time, link, desc, cat, lat, lon)
-        print ev.name, ev.location, ev.lat, ev.lon
+        #print ev.name, ev.location, ev.lat, ev.lon
         db.session.add(ev)
         db.session.commit()
     else:
