@@ -4,7 +4,6 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
 
     <link rel="stylesheet" href="/static/css/app.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/chosen.min.css" type="text/css">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
@@ -12,14 +11,11 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="static/js/chosen.jquery.min.js"></script>
     <script type="text/javascript" src="static/js/oms.min.js"></script>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
 
     <script type="text/javascript" src="/static/js/app.js"></script>
     <script type="text/javascript">
-      //var locs = parse_locations("{{ locations }}");
-      var locs = [];
       var events = parse_events("{{ events }}");
     </script>
     <script type="text/javascript" src="/static/js/map.js"></script>
@@ -46,7 +42,6 @@
         <thread>
           <tr>
             <th>Name</th>
-            <!-- <th>Location</th> -->
             <th>Time</th>
           </tr>
         </thread>
@@ -63,25 +58,8 @@
     </div>
     </div>
     <div class="span10 offset3" id="map_area">
-    <!-- <div class="span12"> -->
       <div id="map-canvas"></div>
-      <!-- <div id="search_bar">
-        <select id="event_search" multiple="true" class="search">
-        </select>
-        <select id="category_search" multiple="true" class="search">
-        </select>
-        <select id="location_search" multiple="true" class="search">
-        </select>
-      </div> -->
-      <!-- <div title="Show panel" id="event_info">
-        <p>Event Info</p>
-      </div> -->
     </div>
-    <!-- <div id="info">
-      <img src="/static/images/info.png" id="info_png">
-      <p id="info_txt">Created by Brian Gapinske, Aaron Plave, and Justin Raymond during WesHack Fall 2013</p>
-    </div> -->
-      <!-- <p id="info_txt">Created by Brian Gapinski, Aaron Plave, and Justin Raymond during WesHack Fall 2013</p> -->
     </div>
   </body>
 </html>
