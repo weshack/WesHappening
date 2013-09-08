@@ -1,5 +1,4 @@
-#! /usr/bin/python
-
+#!/usr/bin/python
 import feedparser
 import re
 import datetime
@@ -9,7 +8,8 @@ from time import sleep
 import logging
 
 
-logging.basicConfig(filename='weshappening.log', level=logging.DEBUG,
+path = "/var/www/weshappening/weshappening/weshappening.log"
+logging.basicConfig(filename=path, level=logging.DEBUG,
                         format="%(asctime)s: %(message)s")
 logging.debug("Updating events")
 

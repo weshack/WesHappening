@@ -1,0 +1,48 @@
+2013-09-08 08:10:35,623: Cleaning database
+2013-09-08 08:10:36,035: Updating events
+2013-09-08 08:10:38,364: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:38,488: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Shanklin+Laboratory%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:39,504: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:39,631: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Office+of+Admission%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:40,645: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:40,772: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Usdan+University+Center%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:41,785: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:41,909: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Memorial+Chapel%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:42,922: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:43,050: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Usdan+University+Center%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:43,063: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:43,184: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Fauver+Apartments%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:43,197: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:43,324: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Fauver+Apartments%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:43,336: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:43,475: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Olin+Library%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:43,489: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:43,622: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Broad+Street+Books%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:43,642: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:43,767: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Fauver+Apartments%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:43,782: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:43,911: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Fauver+Apartments%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:43,928: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:44,059: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Fauver+Apartments%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:44,074: Starting new HTTPS connection (1): maps.google.com
+2013-09-08 08:10:44,202: "GET /maps/api/geocode/json?region=&sensor=false&bounds=&language=&address=Fauver+Apartments%2C+Middletown%2C+CT%2C+06457 HTTP/1.1" 200 None
+2013-09-08 08:10:44,209: Events updated!
+2013-09-08 08:10:44,253: Database clean!
+2013-09-08 09:20:45,268: Cleaning database
+2013-09-08 09:21:04,555: Updating events
+2013-09-08 09:21:10,548: Events updated!
+DEBUG:root:This is a message
+2013-09-08 09:24:01,411: Updating events
+2013-09-08 09:24:07,464: Events updated!
+DEBUG:root:This is a message
+2013-09-08 09:25:02,277: Updating events
+2013-09-08 09:25:07,925: Events updated!
+DEBUG:root:This is a message
+2013-09-08 09:26:02,334: Updating events
+2013-09-08 09:26:08,291: Events updated!
+2013-09-08 09:27:02,086: Updating events
+2013-09-08 09:27:07,803: Events updated!
+2013-09-08 09:28:02,191: Updating events
+2013-09-08 09:28:07,827: Events updated!
+2013-09-08 09:29:02,228: Updating events
+2013-09-08 09:29:08,169: Events updated!

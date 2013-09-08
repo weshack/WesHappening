@@ -1,15 +1,16 @@
-#! /usr/bin/python
+#!/usr/bin/python
 from weshappening import db, Event, Location, delete_event, add_event
 from subprocess import call
 import logging
 
-logging.basicConfig(filename="weshappening.log", level=logging.DEBUG,
+path = "/var/www/weshappening/weshappening/weshappening.log"
+logging.basicConfig(filename=path, level=logging.DEBUG,
                         format="%(asctime)s: %(message)s")
 logging.debug("Cleaning database")
 
 for ev in Event.query.all():
     delete_event(ev.name)
 
-call(["./feed"])
+call(["/var/www/weshappening/weshappening/feed"])
 
 logging.debug("Database clean!")
