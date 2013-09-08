@@ -75,7 +75,9 @@ background-color: rgba(19, 133, 155, 0.14) !important;
 }
 
 #sidebar_title {
+  display: inline;
   text-align: center;
+  margin: 10px;
 }
 #events_table {
   height: 100%;
@@ -110,6 +112,18 @@ background-color: rgba(19, 133, 155, 0.14) !important;
 
 #location_search {
   width:300px;
+}
+
+#head {
+  display: inline-block;
+}
+
+#logo {
+  width:35px;
+  /*display: block;*/
+  height: 35px;
+  float: left;
+  margin-top: 5px;
 }
 
 #info {
