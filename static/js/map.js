@@ -13,11 +13,10 @@ function initialize() {
     zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     minZoom: 12,
-    streetViewControl: false,
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
        mapOptions);
-
+    
   /*a Adds markers for all events in 'events' to the map
    */
   var markers = [];
