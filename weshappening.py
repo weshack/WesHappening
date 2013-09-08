@@ -107,6 +107,10 @@ def index():
   #events = ['option_1','option_2','option_3','option_4']
   events = serialize_events(Event.query.all())
   events2 = Event.query.all()
+  ite = 0
+  for i in events2:
+    events2[ite].time = i.time.strftime("%b %e at %I:%M %p") 
+    ite += 1 
   categories = ['cat 1','cat 2','cat 3']
   return render_template("index.html", locations = locations, events = events, events2=events2,categories = categories)
 

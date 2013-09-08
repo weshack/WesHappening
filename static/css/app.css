@@ -13,9 +13,8 @@ body {
   height: 100%;
 }
 
-#map_canvas img {
-max-width: none;
-}
+#map-canvas label { width: auto; display:inline; }
+#map-canvas img { max-width: none; }
 
 #search_bar {
   position: absolute;
