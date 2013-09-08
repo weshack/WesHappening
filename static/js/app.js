@@ -34,7 +34,7 @@ function parse_events(event_str) {
   arr = event_str.split("}, {");
   for (var i=0;i<arr.length;i++) {
     //console.log(arr[i]);
-    var cat_re = /category&#34;: (\d),/;
+    var cat_re = /category&#34;: &#34;(.+?(?=&#34;))/;
     var link_re = /link&#34;: &#34;(.+?(?=&#34;))/;
     var name_re = /name&#34;: &#34;(.+?(?=&#34;))/;
     var desc_re = /description&#34;: &#34;(.+?(?=&#34;))/

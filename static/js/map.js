@@ -5,7 +5,7 @@ function initialize() {
    */
   function add_options(selector, options) {
     for (var i=0;i<options.length;i++) {
-      $(selector).append("<option>"+options[i]+"<\\options>");    }
+      $(selector).append("<option>"+options[i]+"</options>");    }
   };
 
   var mapOptions = {
@@ -13,32 +13,40 @@ function initialize() {
     zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     minZoom: 12,
-    draggable: false,
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
-      mapOptions);
-  
-  /* Adds markers for all events in 'events' to the map
+       mapOptions);
+    
+  /*a Adds markers for all events in 'events' to the map
    */
   var markers = [];
 
+  /* Creates a marker with a listener
+   */
   function markerize(pos, name, str) {
     var marker = new google.maps.Marker({
         position: pos,
         map: map,
-        title: name,
+        //title: name,
     });
 
     var infowindow = new google.maps.InfoWindow({
       content: content_str,
     });
 
-    google.maps.event.addListener(marker,'click',function() {
+    google.maps.event.addListener(marker,'mouseover',function() {
       infowindow.open(map,marker);
     });
+
+    google.maps.event.addListener(marker,'mouseout',function() {
+      infowindow.close();
+    });
+
     return marker;
   }
 
+  /* Adds events to map
+   */
   for (var i=0;i<events.length;i++) {
     if (Math.floor(events[i].lat) == 41 && Math.ceil(events[i].lon) == -72) {
 
@@ -48,6 +56,7 @@ function initialize() {
         '<h1 id="firstHeading" class="firstHeading">' + events[i].name + '</h1>'+
         '<div id="bodyContent">'+
         '<p>' + events[i].desc + '</p>' +
+        //'<p>' + events[i].cat + '</p>' + 
         '<a href="' + events[i].link + '">Link</a>' +
         '</div>'+
         '</div>';
@@ -55,38 +64,59 @@ function initialize() {
       var pos = new google.maps.LatLng(events[i].lat,events[i].lon);
       var name = events[i].name;
 
-      
       var m = markerize(pos, name, content_str);
-
-      //marker.infowindow = new google.maps.InfoWindow({
-        //content: content_string
-      //});
-
-
-      //google.maps.event.addListener(marker, 'click', function() {
-        //marker.infowindow.open(map,that_marker);
-      //});
 
       markers.push(m);
     }
   }
 
   //adds options to the three search bars
-  var loc_names = [];
-  for (var i=0;i<locs.length;i++) {
-    loc_names.push(locs[i].name);
+
+  //var loc_names = [];
+  //for (var i=0;i<locs.length;i++) {
+  //  loc_names.push(locs[i].name);
+  //}
+  //add_options('#location_search',loc_names);
+
+  var event_names = [];
+  for (var i=0;i<events.length;i++) {
+    event_names.push(events[i].name);
   }
-  add_options('#location_search',loc_names);
+  add_options("#event_search",event_names);
 
   /*
    * Makes search bars pretty using the chosen framework
    */
-  $("#event_search").chosen({no_results_text: "Nothing Happening :(", placeholder_text_multiple: "Search for events by name."});
+  $("#event_search").chosen({no_results_text: "Nothing Happening :(", placeholder_text_multiple: "Search for events by name.", max_selected_options: 1});
 
-  $("#category_search").chosen({no_results_text: "No categories found :(", placeholder_text_multiple: "Filter by event category"});
+  $("#category_search").chosen({no_results_text: "No categories found :(", placeholder_text_multiple: "Filter by event category", max_selected_options: 2});
 
-  $("#location_search").chosen({no_results_text: ":(", placeholder_text_multiple: "Filter event by location"});
+  $("#location_search").chosen({no_results_text: ":(", placeholder_text_multiple: "Filter event by location", max_selected_options: 2});
 
+
+google.maps.event.addListener(map,'center_changed',function() { 
+
+    var sw = new google.maps.LatLng(41.54, -72.69);
+    var ne = new google.maps.LatLng(41.565, -72.63);
+    var allowedBounds = new google.maps.LatLngBounds(sw, ne);
+    if(! allowedBounds.contains(map.getCenter())) {
+      var C = map.getCenter();
+      var X = C.lng();
+      var Y = C.lat();
+
+      var AmaxX = allowedBounds.getNorthEast().lng();
+      var AmaxY = allowedBounds.getNorthEast().lat();
+      var AminX = allowedBounds.getSouthWest().lng();
+      var AminY = allowedBounds.getSouthWest().lat();
+
+      if (X < AminX) {X = AminX;}
+      if (X > AmaxX) {X = AmaxX;}
+      if (Y < AminY) {Y = AminY;}
+      if (Y > AmaxY) {Y = AmaxY;}
+
+      map.setCenter(new google.maps.LatLng(Y,X));
+    }
+});
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
