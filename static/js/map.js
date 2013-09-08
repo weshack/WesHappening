@@ -47,6 +47,9 @@ function initialize() {
     google.maps.event.addListener(marker,'click',function() {
       infowindow.open(map,marker);
     });
+    google.maps.event.addListener(map,'click',function() {
+      infowindow.close();
+    });
 
 
     // google.maps.event.addListener(marker,'clockout',function() {
