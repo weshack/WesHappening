@@ -94,7 +94,7 @@ for item in wesleying_feed:
     cat = ite % 4
     ite += 1
     
-    event = {"name": name, "location": loc, "time":datetime.datetime(2013,9,7,18,00) , 
+    event = {"name": name, "location": loc, "time": datetime.datetime.today() , 
             "link": link, "description": desc, "category":cat}
 
     #print event,"EVENT"
