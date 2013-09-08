@@ -3,40 +3,41 @@ import urllib2
 from bs4 import BeautifulSoup
 import datetime
 import re
+from operator import itemgetter, attrgetter
 
-def time_parser(time_string):
-    x_to_z = re.compile('[\d]{2}(am|pm).*[\d]{1,2}(am|pm)')
-    c1 = x_to_z.findall(p1,re.I)
-    print c1
-    if c1:
-        time = c1[0]
-        first = re.compile('[\d]{1,2}')
-        start = int(first.findall(time)[0])
-        print start
-        am_pm = re.compile('(am|pm)')
-        to_24 = am_pm.findall(time)[0]
-        if to_24 == 'pm':
-            start += 12
+# def time_parser(time_string):
+#     x_to_z = re.compile('[\d]{2}(am|pm).*[\d]{1,2}(am|pm)')
+#     c1 = x_to_z.findall(p1,re.I)
+#     print c1
+#     if c1:
+#         time = c1[0]
+#         first = re.compile('[\d]{1,2}')
+#         start = int(first.findall(time)[0])
+#         print start
+#         am_pm = re.compile('(am|pm)')
+#         to_24 = am_pm.findall(time)[0]
+#         if to_24 == 'pm':
+#             start += 12
 
-        end = re.compile
+#         end = re.compile
 
-        #make sure to handle an event that has an AM that goes to the next day
-        #handle 10:XX - YY:ZZ
-        print time
+#         #make sure to handle an event that has an AM that goes to the next day
+#         #handle 10:XX - YY:ZZ
+#         print time
 
 
 identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:"]}
 
 # import get_data;get_data.content_parser()
 
-def unicode_hack(unicodey_string):
-    """gets all unicode shit out of a string. Hackily"""
-    word = ""
-    for i in unicodey_string:
-        if len(i) == 1:
+# def unicode_hack(unicodey_string):
+#     """gets all unicode shit out of a string. Hackily"""
+#     word = ""
+#     for i in unicodey_string:
+#         if len(i) == 1:
 
-            word += i
-    return word
+#             word += i
+#     return word
 
 def content_parser(content,identifiers):
     """
@@ -57,9 +58,13 @@ def content_parser(content,identifiers):
                 word = str(word)
                 # print word,len(word)
             except:
-                word = word.split()[0]
-                # print word,"w1"
-
+                try:
+                    print word,"PROBLEM HERE",len(word)
+                    word = word.split()[0]
+                    # print word,"w1"
+                except:
+                    #some random instances of unicode weird things.
+                    pass 
             e = [str(z) for z in identifiers[i]]
             # print e,"EEEEEEEEEEE",word
             for t in e:
@@ -80,21 +85,40 @@ def content_builder(content,identifiers,matches):
     """
     Builds list of associated content from list based on given subset/indexes of matches 
     """
-    identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:","Place"]}
+    # identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:","Place"]}
     inverse_dict = {}
     for i in identifiers:
-        for z in identifiers[i]
+        for z in identifiers[i]:
             inverse_dict[z] = i
 
-    print inverse_dict,"INVERSE"
+    # print inverse_dict,"INVERSE"
 
+    #sort matches by index ascending
+    matches = sorted(matches,key=itemgetter(1))
+    print matches,"matches"
+
+    #iterating through the matches and building up a list of words that 
+    #occur before the next match item. If no next match, grab everything
+    #until end.
     event = {}
+    index = 0
     for m in matches:
         if m[0] in inverse_dict:
-            
+            try:
+                stop = matches[index+1][1]
+                words = [word for word in content[m[1]+1:stop]]
+                print words,"words"
+            except:
+                words = [word for word in content[m[1]+1:]]
+                print words,"words"
+            event[inverse_dict[m[0]]] = words
+        index += 1
+
+    return event
 
 
-# import get_data;a = get_data.xml_parser();b = get_data.content_parser(a)
+
+# import get_data;a = get_data.xml_parser()
 def get_xml():
     xml = urllib2.urlopen("http://wesleying.org/feed/")
     dom = minidom.parse(xml)
@@ -102,14 +126,12 @@ def get_xml():
     return items
 
 
-# import get_data;get_data.xml_parser()
-
 def xml_parser():
     """FOR WESLEYING"""
     items = get_xml()
     events = []
     # print items,"ITEMS"
-    for i in items[0:1]:
+    for i in items:
         print i,"ITEM"
         title = i.getElementsByTagName('title')[0].childNodes[0].data
         url = i.getElementsByTagName('link')[0].childNodes[0].data
@@ -160,14 +182,24 @@ def xml_parser():
         soup = BeautifulSoup(content_html)
         # print '\/n',soup,"SOOOOOOOOOOUP"
         # print "CONTENT",content_html,"END CONTENT"
-        info = soup.get_text('|').split('|')
+        content = soup.get_text('|').split('|')
+        print content,"CONTENT"
         # print info,"INFO"
-        content = content_parser(info,identifiers)
-        if content:
-            
+        match = content_parser(content,identifiers)
+        if match:
             ##DO MORE THINGS
-            built = content_builder(content)
-            event = "those things thing"
+            built = content_builder(content,identifiers,match)
+            print built
+            if built.get("place"):
+                event_location = built.get("place")
+            if built.get("time"):
+                event_time = built.get("time")
+            if built.get("date"):
+                event_date = built.get("date")  
+
+            event = {"title":title,"url":url,"description":description,
+                "location":event_location,"time":event_time,
+                "date":event_date,"full_description":full_description}
         else:
             event = {"title":title,"url":url,"description":description,
                 "location":event_location,"time":event_time,
@@ -188,6 +220,6 @@ def xml_parser():
         #         "date":event_date}
 
         # events.append(event)
-        events.append(events)
+        events.append(event)
 
     return events
