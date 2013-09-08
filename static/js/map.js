@@ -25,8 +25,6 @@ function initialize() {
    */
   var markers = [];
 
-  /* Creates a marker with a listener
-   */
   function markerize(pos, name, str) {
     var marker = new google.maps.Marker({
         position: pos,
@@ -50,6 +48,7 @@ function initialize() {
       infowindow.open(map,marker);
     });
 
+
     // google.maps.event.addListener(marker,'clockout',function() {
     //   infowindow.close();
     // });
@@ -57,7 +56,6 @@ function initialize() {
     oms.addMarker(marker);
 
 
-// <<<<<<< HEAD
 //     $(window).on('hashchange', function() {
       
 //       });
@@ -65,15 +63,12 @@ function initialize() {
 //           infowindow.open(map,marker);
         
 //     }
-// =======
-// >>>>>>> 3576d40e752eafdb28d88099cacd4e8d5377d580
 
     return marker;
   }
 
   /* Adds events to map
    */
-  
   for (var i=0;i<events.length;i++) {
     if ((events[i].lat) != 0.0 && (events[i].lon) != 0.0) {
 
@@ -98,6 +93,14 @@ function initialize() {
     }
   }
 
+
+  // Adds a hover listener to all the rows in the event table
+  $(".event_name").each(function() {
+    var index = $(this).closest("tr").index();
+    $(this).click(function(){
+      google.maps.event.trigger(markers[index-1],"click");
+    });
+  });
 
   //adds options to the three search bars
 
