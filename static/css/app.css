@@ -40,8 +40,8 @@ body {
 }
 
 #info {
-  width:30px;
-  height:30px;
+  width:500px;
+  height:100px;
   position: absolute;
   left:10px;
   bottom:10px;
@@ -53,4 +53,6 @@ body {
 }
 
 #info_txt {
+  position:relative;
+
 }
