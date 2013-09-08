@@ -137,9 +137,9 @@ def add_event(event):
         #print ev.name, ev.location, ev.lat, ev.lon
         db.session.add(ev)
         db.session.commit()
-    else:
-        delete_event(exists.name)
-        add_event(event)
+    #else:
+    #    delete_event(exists.name)
+    #    add_event(event)
 
 def delete_event(event):
     ev = Event.query.filter_by(name=event).first()

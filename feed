@@ -7,6 +7,9 @@ from weshappening import add_event
 from get_data import xml_parser
 from time import sleep
 
+f = file.open("/var/log/weshappening.log", "w+")
+f.write("Adding events")
+
 feed_url = "http://events.wesleyan.edu/events/cal_rss_today"
 
 feed = feedparser.parse(feed_url)
@@ -61,7 +64,8 @@ for item in wesleying_feed:
     time = item["time"]
     #this removes some unicode characters that I can't
     #seem to convert to ascii. Therefore grammar=messy
-    desc = item['description'].encode('ascii','ignore')[:75]
+    #desc = item['description'].encode('ascii','ignore')[:75]
+    desc = "wesleying.org/category/events/"
     loc = item["location"]
     if loc:
         loc = str(loc[0].encode('ascii','ignore'))
@@ -92,3 +96,6 @@ for item in wesleying_feed:
 
     #print event,"EVENT"
     add_event(event)
+
+f.write("events added!")
+f.close()

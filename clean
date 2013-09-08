@@ -2,7 +2,13 @@
 from weshappening import db, Event, Location, delete_event, add_event
 from subprocess import call
 
+f = file.open("/var/log/weshappening.log", "w+")
+f.write("Cleaning database")
+
 for ev in Event.query.all():
     delete_event(ev.name)
 
 call(["./feed"])
+
+f.write("Database clean!")
+f.close()
