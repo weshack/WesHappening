@@ -24,6 +24,7 @@ function initialize() {
   /*a Adds markers for all events in 'events' to the map
    */
   var markers = [];
+  var open_windows = [];
 
   function markerize(pos, name, str) {
     var marker = new google.maps.Marker({
@@ -36,6 +37,8 @@ function initialize() {
       content: content_str,
     });
 
+    open_windows.push(infowindow);
+
     oms.addListener('spiderfy', function(markers) {
         infowindow.close();
     });
@@ -43,9 +46,24 @@ function initialize() {
     // google.maps.event.addListener(marker,'mouseover',function() {
     //   infowindow.open(map,marker);
     // });
+    function isInfoWindowOpen(infoWindow){
+    var map = infowindow.getMap();
+    return (map === null || typeof map === "undefined");
+    }
+
+    if (isInfoWindowOpen(infowindow)){
+        // do something if it is open
+    } else {
+        // do something if it is closed
+    }
 
     google.maps.event.addListener(marker,'click',function() {
-      infowindow.open(map,marker);
+    for (iw in open_windows){
+      if (isInfoWindowOpen(iw)){
+        // iw.close();
+      }
+    }
+    infowindow.open(map,marker);
     });
     google.maps.event.addListener(map,'click',function() {
       infowindow.close();
