@@ -76,7 +76,6 @@ def serialize_events(events):
     return simplejson.dumps(evs)
 
 
-## haha repeating searches need to clean
 def query_name(pattern, d):
     patterns = pattern.split(" ")
     if d == "location":
@@ -129,7 +128,7 @@ def add_event(event):
                 try:
                     lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
                 except:
-                    lat, lon = (41.5, -72.5)
+                    lat, lon = (41.5555, -72.6575)
         time = event["time"]
         link = event["link"]
         desc = event["description"]
