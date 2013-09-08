@@ -80,38 +80,38 @@ def query_name(pattern, d):
     patterns = pattern.split(" ")
     if d == "location":
         locs = Location.query.all()
-        l = []
-        for loc in locs:
-            if not (loc.name.find(pattern[0]) == -1):
-                l.append(loc)
-        if len(l) == 1:
-            return l[0]
-        elif len(l) > 1:
-            for p in patterns:
-                match = []
-                for i in l:
-                    if not (i.name.find(p) == -1):
-                        match.append(i)
-                if len(match) > 0:
-                    l = match
-            return l[0]
+        #l = []
+        #for loc in locs:
+        #    if not (loc.name.find(pattern[0]) == -1):
+        #        l.append(loc)
+        #if len(l) == 1:
+        #    return l[0]
+        #elif len(l) > 1:
+        for p in patterns:
+            match = []
+            for loc in locs:
+                if not (loc.name.find(p) == -1):
+                    match.append(loc)
+            if len(match) > 0:
+                locs = match
+        return locs[0]
     elif d == "event":
         evs = Event.query.all()
-        e = []
-        for ev in evs:
-            if not (ev.name.find(pattern[0]) == -1):
-                e.append(ev)
-        if len(l) == 1:
-            return e[0]
-        elif len(l) > 1:
-            for p in patterns:
-                match = []
-                for i in e:
-                    if not (i.name.find(p) == -1):
-                        match.append(i)
-                if len(match) > 0:
-                    e = match
-            return e[0]
+        #e = []
+        #for ev in evs:
+        #    if not (ev.name.find(pattern[0]) == -1):
+        #        e.append(ev)
+        #if len(l) == 1:
+        #    return e[0]
+        #elif len(l) > 1:
+        for p in patterns:
+            match = []
+            for ev in evs:
+                if not (ev.name.find(p) == -1):
+                    match.append(ev)
+            if len(match) > 0:
+                evs = match
+        return evs[0]
     return None
 
 @app.route('/')
@@ -126,11 +126,11 @@ def index():
 
 def add_event(event):
     name = event["name"]
-    if not Event.query.filter_by(name=name).first():
+    exists = Event.query.filter_by(name=name).first()
+    if not exists:
         loc = event["location"]
         #location = Location.query.filter(Location.name.startswith(loc)).first()
         location = query_name(loc, "location")
-        print location
         if not location:
             loc = Location.query.filter_by(name="Unknown").first()
             lat, lon = (0.0, 0.0)
@@ -144,6 +144,9 @@ def add_event(event):
         ev = Event(name, loc, time, link, desc, cat, lat, lon)
         db.session.add(ev)
         db.session.commit()
+    else:
+        delete_event(exists.name)
+        add_event(event)
 
 def delete_event(event):
     ev = Event.query.filter_by(name=event).first()
