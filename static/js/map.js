@@ -58,13 +58,16 @@ function initialize() {
     oms.addMarker(marker);
 
 
-    $(window).on('hashchange', function() {
+// <<<<<<< HEAD
+//     $(window).on('hashchange', function() {
       
-      });
-    window.onload = function(){
-          infowindow.open(map,marker);
+//       });
+//     window.onload = function(){
+//           infowindow.open(map,marker);
         
-    }
+//     }
+// =======
+// >>>>>>> 3576d40e752eafdb28d88099cacd4e8d5377d580
 
     return marker;
   }
