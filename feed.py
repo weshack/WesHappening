@@ -15,6 +15,10 @@ wesleying_feed = xml_parser()
 ite = 0
 for item in feed["items"]:
     name = str(item["title"])
+    if name.startswith("TBA"):
+        name = name[4:]
+    else:
+        name = name[9:]
     value = item["summary_detail"]["value"].split("<br />")
     date = re.match("\d\d/\d\d/\d\d\d\d", str(value[0])).group().split("/")
     time = re.search("(TBA|\d\d:\d\d (a|p)m( - \d\d:\d\d (a|p)m)*)", str(value[0])).group().split(" ")
@@ -55,7 +59,7 @@ for item in wesleying_feed[0:1]:
     time = item["time"]
     #this removes some unicode characters that I can't
     #seem to convert to ascii. Therefore grammar=messy
-    desc = item['description'].encode('ascii','ignore')[0:10]
+    desc = item['description'][:20]#.encode('ascii','ignore')
     loc = str(item["location"][0]) #0 for now..()
 
     #print loc
@@ -75,6 +79,7 @@ for item in wesleying_feed[0:1]:
             dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]))
     except:
     #    print "nope"
+        pass
     cat = ite % 4
     ite += 1
     
