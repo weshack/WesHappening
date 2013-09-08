@@ -9,6 +9,19 @@ function initialize() {
       $(selector).append("<option>"+options[i]+"</options>");    }
   };
 
+  var styles_array = 
+  [
+    {
+     "elementType": "geometry",
+                    "stylers": [{ "hue": "#00e5ff" }]
+    },
+    {
+      "featureType": "poi.school",
+      "stylers": [{ "hue": "#ff0000" }]
+    },
+    {}
+  ];
+
   var mapOptions = {
     center: new google.maps.LatLng(41.5526833,-72.6612454),
     zoom: 15,
@@ -17,6 +30,7 @@ function initialize() {
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
        mapOptions);
+  map.setOptions({styles: styles_array});
     
   /* spreads out markers that are close */
   var oms = new OverlappingMarkerSpiderfier(map);
