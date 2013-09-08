@@ -25,8 +25,6 @@ function initialize() {
    */
   var markers = [];
 
-  /* Creates a marker with a listener
-   */
   function markerize(pos, name, str) {
     var marker = new google.maps.Marker({
         position: pos,
@@ -63,7 +61,6 @@ function initialize() {
 
   /* Adds events to map
    */
-  
   for (var i=0;i<events.length;i++) {
     if ((events[i].lat) != 0.0 && (events[i].lon) != 0.0) {
 
@@ -88,6 +85,16 @@ function initialize() {
     }
   }
 
+
+  // Adds a hover listener to all the rows in the event table
+  $(".event_name").each(function() {
+    var index = $(this).closest("tr").index();
+    $(this).hover(function(){
+      google.maps.event.trigger(markers[index-1],"mouseover");
+    }, function(){
+      google.maps.event.trigger(markers[index-1],"mouseout");
+    });
+  });
 
   //adds options to the three search bars
 
