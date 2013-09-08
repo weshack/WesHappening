@@ -135,6 +135,7 @@ def add_event(event):
         desc = event["description"]
         cat = event["category"]
         ev = Event(name, loc, time, link, desc, cat, lat, lon)
+        print ev.name, ev.location, ev.lat, ev.lon
         db.session.add(ev)
         db.session.commit()
     else:

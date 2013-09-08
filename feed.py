@@ -58,7 +58,7 @@ for item in wesleying_feed[0:1]:
     desc = item['description'].encode('ascii','ignore')[0:10]
     loc = str(item["location"][0]) #0 for now..()
 
-    print loc
+    #print loc
     link = str(item['url'])
 
     try:
@@ -74,12 +74,12 @@ for item in wesleying_feed[0:1]:
         else:
             dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]))
     except:
-        print "nope"
+    #    print "nope"
     cat = ite % 4
     ite += 1
     
     event = {"name": name, "location": loc, "time":datetime.datetime(2013,9,7,18,00) , 
             "link": link, "description": desc, "category":cat}
 
-    print event,"EVENT"
+    #print event,"EVENT"
     add_event(event)
