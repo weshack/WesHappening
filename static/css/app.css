@@ -80,12 +80,13 @@ background-color: rgba(19, 133, 155, 0.14) !important;
 #events_table {
   height: 100%;
   background-color:#FFFFFF;
-  border-radius:5px;
-  border-color:#F7E4E4;
-  -mox-border-radius:5px;
-  -webkit-border-radius:20px;
+  border: 1px;
+  border-color:#FFFFFF;
+  border-style: outset;
+  border-radius:10px;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
 }
-
 
 #content {
   max-width: 400px;
