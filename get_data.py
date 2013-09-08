@@ -26,7 +26,7 @@ from operator import itemgetter, attrgetter
 #         print time
 
 
-identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:"]}
+# identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:"]}
 
 # import get_data;get_data.content_parser()
 
@@ -59,7 +59,7 @@ def content_parser(content,identifiers):
                 # print word,len(word)
             except:
                 try:
-                    print word,"PROBLEM HERE",len(word)
+                    # print word,"PROBLEM HERE",len(word)
                     word = word.split()[0]
                     # print word,"w1"
                 except:
@@ -95,7 +95,7 @@ def content_builder(content,identifiers,matches):
 
     #sort matches by index ascending
     matches = sorted(matches,key=itemgetter(1))
-    print matches,"matches"
+    # print matches,"matches"
 
     #iterating through the matches and building up a list of words that 
     #occur before the next match item. If no next match, grab everything
@@ -107,10 +107,10 @@ def content_builder(content,identifiers,matches):
             try:
                 stop = matches[index+1][1]
                 words = [word for word in content[m[1]+1:stop]]
-                print words,"words"
+                # print words,"words"
             except:
                 words = [word for word in content[m[1]+1:]]
-                print words,"words"
+                # print words,"words"
             event[inverse_dict[m[0]]] = words
         index += 1
 
@@ -132,13 +132,13 @@ def xml_parser():
     events = []
     # print items,"ITEMS"
     for i in items:
-        print i,"ITEM"
+        # print i,"ITEM"
         title = i.getElementsByTagName('title')[0].childNodes[0].data
         url = i.getElementsByTagName('link')[0].childNodes[0].data
         description = i.getElementsByTagName('description')[0].childNodes[0].data
         content_html = i.getElementsByTagName('content:encoded')[0].childNodes[0].data
         parsed_content = BeautifulSoup(content_html)
-        print parsed_content
+        # print parsed_content
         try:
             full_description = parsed_content.find('blockquote').text
         except:
@@ -178,18 +178,18 @@ def xml_parser():
         #       break
 
         # print event_location,event_time,event_date,"Stuff"
-        identifiers = {"date":["Date:"],"time":["Time:"],"place":["Place:","Place"]}
+        identifiers = {"date":["Date:"],"time":["Time:","Time"],"place":["Place:","Place"]}
         soup = BeautifulSoup(content_html)
         # print '\/n',soup,"SOOOOOOOOOOUP"
         # print "CONTENT",content_html,"END CONTENT"
         content = soup.get_text('|').split('|')
-        print content,"CONTENT"
+        # print content,"CONTENT"
         # print info,"INFO"
         match = content_parser(content,identifiers)
         if match:
             ##DO MORE THINGS
             built = content_builder(content,identifiers,match)
-            print built
+            # print built
             if built.get("place"):
                 event_location = built.get("place")
             if built.get("time"):
