@@ -22,9 +22,27 @@ function initialize() {
    */
   var markers = [];
 
+  function markerize(pos, name, str) {
+    var marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        title: name,
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+      content: content_str,
+    });
+
+    google.maps.event.addListener(marker,'click',function() {
+      infowindow.open(map,marker);
+    });
+    return marker;
+  }
+
   for (var i=0;i<events.length;i++) {
     if (Math.floor(events[i].lat) == 41 && Math.ceil(events[i].lon) == -72) {
-      var content_string = '<div id="content">'+
+
+      var content_str = '<div id="content">'+
         '<div id="siteNotice">'+
         '</div>'+
         '<h1 id="firstHeading" class="firstHeading">' + events[i].name + '</h1>'+
@@ -34,24 +52,23 @@ function initialize() {
         '</div>'+
         '</div>';
 
-      var marker = new google.maps.Marker( {
-        position: new google.maps.LatLng(events[i].lat, events[i].lon),
-        map: map,
-        title: events[i].name,
-      });
+      var pos = new google.maps.LatLng(events[i].lat,events[i].lon);
+      var name = events[i].name;
 
-      marker.infowindow = new google.maps.InfoWindow({
-        content: content_string
-      });
-      markers.push(marker)
+      
+      var m = markerize(pos, name, content_str);
+
+      //marker.infowindow = new google.maps.InfoWindow({
+        //content: content_string
+      //});
+
+
+      //google.maps.event.addListener(marker, 'click', function() {
+        //marker.infowindow.open(map,that_marker);
+      //});
+
+      markers.push(m);
     }
-  }
-  /* Adds event listeners to the markers
-   */
-  for (var i=0;i<markers.length;i++) {
-    google.maps.event.addListener(markers[i],'click', function() {
-      markers[i].infowindow.open(map,markers[i]);
-    });
   }
 
   //adds options to the three search bars
