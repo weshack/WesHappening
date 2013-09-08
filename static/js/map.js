@@ -13,20 +13,11 @@ function initialize() {
     zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     minZoom: 12,
+    draggable: false,
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
   
-  //map.set('sytles', 
-  //    [
-  //      {
-  //        "featureType": "poi.school",
-  //        "stylers": [
-  //            { "visibility": "on" },
-  //            { "hue": "#ff0077" }
-  //          ]
-  //        }
-  //    ]);
   /* Adds markers for all events in 'events' to the map
    */
   var markers = [];
@@ -37,7 +28,7 @@ function initialize() {
     var marker = new google.maps.Marker({
         position: pos,
         map: map,
-        title: name,
+        //title: name,
     });
 
     var infowindow = new google.maps.InfoWindow({
@@ -66,7 +57,6 @@ function initialize() {
         '<h1 id="firstHeading" class="firstHeading">' + events[i].name + '</h1>'+
         '<div id="bodyContent">'+
         '<p>' + events[i].desc + '</p>' +
-        '<p>' + events[i].cat + '</p>' + 
         '<a href="' + events[i].link + '">Link</a>' +
         '</div>'+
         '</div>';
@@ -96,29 +86,6 @@ function initialize() {
 
   $("#location_search").chosen({no_results_text: ":(", placeholder_text_multiple: "Filter event by location"});
 
-google.maps.event.addListener(map,'center_changed',function() { 
-
-    var sw = new google.maps.LatLng(41.54, -72.69);
-    var ne = new google.maps.LatLng(41.565, -72.63);
-    var allowedBounds = new google.maps.LatLngBounds(sw, ne);
-    if(! allowedBounds.contains(map.getCenter())) {
-      var C = map.getCenter();
-      var X = C.lng();
-      var Y = C.lat();
-
-      var AmaxX = allowedBounds.getNorthEast().lng();
-      var AmaxY = allowedBounds.getNorthEast().lat();
-      var AminX = allowedBounds.getSouthWest().lng();
-      var AminY = allowedBounds.getSouthWest().lat();
-
-      if (X < AminX) {X = AminX;}
-      if (X > AmaxX) {X = AmaxX;}
-      if (Y < AminY) {Y = AminY;}
-      if (Y > AmaxY) {Y = AmaxY;}
-
-      map.setCenter(new google.maps.LatLng(Y,X));
-    }
-});
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -144,5 +111,4 @@ google.maps.event.addDomListener(window, 'load', initialize);
     marker.setMap(map);
   }
   */
-
 
