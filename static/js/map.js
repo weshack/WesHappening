@@ -49,6 +49,7 @@ function initialize() {
       infowindow.open(map,marker);
     });
 
+
     // google.maps.event.addListener(marker,'clockout',function() {
     //   infowindow.close();
     // });
@@ -56,7 +57,6 @@ function initialize() {
     oms.addMarker(marker);
 
 
-// <<<<<<< HEAD
 //     $(window).on('hashchange', function() {
       
 //       });
@@ -64,8 +64,6 @@ function initialize() {
 //           infowindow.open(map,marker);
         
 //     }
-// =======
-// >>>>>>> 3576d40e752eafdb28d88099cacd4e8d5377d580
 
     return marker;
   }
