@@ -17,6 +17,9 @@ function initialize() {
   var map = new google.maps.Map(document.getElementById("map-canvas"),
        mapOptions);
     
+  /* spreads out markers that are close */
+  var oms = new OverlappingMarkerSpiderfier(map);
+
   /*a Adds markers for all events in 'events' to the map
    */
   var markers = [];
@@ -34,6 +37,15 @@ function initialize() {
       content: content_str,
     });
 
+    oms.addListener('click', function(marker, event) {
+        infowindow.setContent(marker.desc);
+        infowindow.open(map, marker);
+    });
+
+    oms.addListener('spiderfy', function(markers) {
+        infowindow.close();
+    });
+
     google.maps.event.addListener(marker,'mouseover',function() {
       infowindow.open(map,marker);
     });
@@ -41,6 +53,8 @@ function initialize() {
     google.maps.event.addListener(marker,'mouseout',function() {
       infowindow.close();
     });
+
+    oms.addMarker(marker);
 
     return marker;
   }
