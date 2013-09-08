@@ -31,6 +31,7 @@ function initialize() {
         map: map,
         //title: name,
     });
+    marker.id = name;
 
     var infowindow = new google.maps.InfoWindow({
       content: content_str,
@@ -99,9 +100,17 @@ function initialize() {
 
   // Adds a hover listener to all the rows in the event table
   $(".event_name").each(function() {
-    var index = $(this).closest("tr").index();
+    var m;
+    var name = this.id;
     $(this).click(function(){
-      google.maps.event.trigger(markers[index-1],"click");
+      for (var i=0;i<markers.length;i++) {
+        if (name == markers[i].id) {
+          m = markers[i];
+        }
+      }
+      if (m != undefined && m != null) {
+        google.maps.event.trigger(m,"click");
+      }
     });
   });
 
