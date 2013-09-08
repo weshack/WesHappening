@@ -38,3 +38,19 @@ body {
 #location_search {
   width:300px;
 }
+
+#info {
+  width:30px;
+  height:30px;
+  position: absolute;
+  left:10px;
+  bottom:10px;
+}
+
+#info_png {
+  width:30px;
+  height:30px;
+}
+
+#info_txt {
+}
