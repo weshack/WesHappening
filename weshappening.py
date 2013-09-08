@@ -7,6 +7,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
 db = SQLAlchemy(app)
 
+cats = {0: "Auditions",  1: "Theater", 2: "Sports", 
+        3: "Admissions", 4: "Concert", 5:"Other"}
+
 class Event(db.Model):
     __tablename__ = 'event'
     id = db.Column(db.Integer, primary_key=True)
@@ -67,7 +70,7 @@ def serialize_events(events):
               'time': time, 'link': event.link,
               'description': event.description,
               'lat': event.lat, 'lon': event.lon,
-              'category': event.category}
+              'category': cats[event.category]}
         evs.append(ev)
     return simplejson.dumps(evs)
 
