@@ -9,7 +9,8 @@ from time import sleep
 import logging
 
 
-logging.basicConfig(filename='weshappening.log', level=logging.DEBUG)
+logging.basicConfig(filename='weshappening.log', level=logging.DEBUG,
+                        format="%(asctime)s: %(message)s")
 logging.debug("Updating events")
 
 feed_url = "http://events.wesleyan.edu/events/cal_rss_today"
