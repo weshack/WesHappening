@@ -22,6 +22,8 @@ function initialize() {
    */
   var markers = [];
 
+  /* Creates a marker with a listener
+   */
   function markerize(pos, name, str) {
     var marker = new google.maps.Marker({
         position: pos,
@@ -39,6 +41,8 @@ function initialize() {
     return marker;
   }
 
+  /* Adds events to map
+   */
   for (var i=0;i<events.length;i++) {
     if (Math.floor(events[i].lat) == 41 && Math.ceil(events[i].lon) == -72) {
 
@@ -55,17 +59,7 @@ function initialize() {
       var pos = new google.maps.LatLng(events[i].lat,events[i].lon);
       var name = events[i].name;
 
-      
       var m = markerize(pos, name, content_str);
-
-      //marker.infowindow = new google.maps.InfoWindow({
-        //content: content_string
-      //});
-
-
-      //google.maps.event.addListener(marker, 'click', function() {
-        //marker.infowindow.open(map,that_marker);
-      //});
 
       markers.push(m);
     }
