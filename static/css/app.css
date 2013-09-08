@@ -31,3 +31,15 @@ body {
   width: 200px;
   height: 600px;
 }
+
+#event_search {
+  width:400px;
+}
+
+#category_search {
+  width:300px;
+}
+
+#location_search {
+  width:300px;
+}
