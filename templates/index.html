@@ -39,7 +39,7 @@
         <tbody>
           {% for i in events2 %}
             <tr>
-              <td style="width: 50%;">{{i.name}}</td>
+              <td id="{{i.name}}" style="width: 50%;"><a href="#{{i.name}}">{{i.name}}</a></td>
 <!--               <td>{{i.location.name}}</td>
  -->              <td style="width: 50%;">{{i.time}}</td>
             </tr>

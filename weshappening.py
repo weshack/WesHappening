@@ -114,6 +114,12 @@ def index():
   categories = ['cat 1','cat 2','cat 3']
   return render_template("index.html", locations = locations, events = events, events2=events2,categories = categories)
 
+# @app.route("/#<regex('.*'):param>")
+# def to_pin(param):
+    
+
+
+
 
 def add_event(event):
     name = event["name"]

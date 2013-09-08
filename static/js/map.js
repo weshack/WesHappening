@@ -3,6 +3,7 @@ function initialize() {
   /*
    * Dynamically adds html options to a select menu with given id
    */
+
   function add_options(selector, options) {
     for (var i=0;i<options.length;i++) {
       $(selector).append("<option>"+options[i]+"</options>");    }
@@ -45,17 +46,31 @@ function initialize() {
       infowindow.open(map,marker);
     });
 
+    google.maps.event.addListener(marker,'click',function() {
+      infowindow.open(map,marker);
+    });
+
     google.maps.event.addListener(marker,'mouseout',function() {
       infowindow.close();
     });
 
     oms.addMarker(marker);
 
+
+    $(window).on('hashchange', function() {
+  .. work ..
+});n()
+    window.onload = function(){
+          infowindow.open(map,marker);
+        
+    }
+
     return marker;
   }
 
   /* Adds events to map
    */
+  
   for (var i=0;i<events.length;i++) {
     if ((events[i].lat) != 0.0 && (events[i].lon) != 0.0) {
 
@@ -72,12 +87,14 @@ function initialize() {
 
       var pos = new google.maps.LatLng(events[i].lat,events[i].lon);
       var name = events[i].name;
+      // var url = "/#name";
 
       var m = markerize(pos, name, content_str);
 
       markers.push(m);
     }
   }
+
 
   //adds options to the three search bars
 
