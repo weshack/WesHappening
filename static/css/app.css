@@ -19,7 +19,7 @@ body {
   padding-left:0%;
   height:100%;
   margin-left:0px;
-  width: 75%;
+  width: 70%;
   }
 }
 
@@ -62,10 +62,10 @@ body {
   padding-right:0px;
   overflow: scroll;
   padding-left:0%;
-  width: 25%;
+  width: 30%;
   height:100%;
   margin-left:0px;
-  background-color:#FC8890;
+  background-color:#F7E4E4;
 }
 .table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
     background-color: rgba(78, 133, 216, 0.1) !important;
@@ -75,9 +75,14 @@ background-color: rgba(19, 133, 155, 0.14) !important;
 }
 
 #sidebar_title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 30px;
   display: inline;
   text-align: center;
   margin: 10px;
+  margin-top: 10px;
+  position: relative;
+  top: 12px;
 }
 #events_table {
   height: 100%;
