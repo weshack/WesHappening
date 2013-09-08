@@ -64,6 +64,7 @@ function initialize() {
         // iw.close();
       }
     }
+    infowindow.close();
     infowindow.open(map,marker);
     });
     google.maps.event.addListener(map,'click',function() {
