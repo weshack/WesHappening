@@ -24,25 +24,56 @@
 
   </head>
   <body>
-    <div class="container-fluid" style="padding-right:0px;
-    padding-left:25%; height:100%;">
+    <div class="span2" id="sidebar"> 
+      <div class="well">
+      <h3 id="sidebar_title">
+        Events
+      </h3>
+      <table class="table table-striped">
+        <thread>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Time</th>
+          </tr>
+        <tbody>
+          {% for i in events2 %}
+            <tr>
+              <td>{{i.name}}</td>
+              <td>{{i.location.name}}</td>
+              <td>{{i.time}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+    </div>
+    <div class="span10 offset3" style="padding-right:0px;
+    padding-left:0%; height:100%;margin-left: 0px;width: 75%;">
+    <!-- <div class="span12"> -->
       <div id="map-canvas"></div>
-      <div id="search_bar">
+      <!-- <div id="search_bar">
         <select id="event_search" multiple="true" class="search">
         </select>
         <select id="category_search" multiple="true" class="search">
         </select>
         <select id="location_search" multiple="true" class="search">
         </select>
-      </div>
-      <div title="Show panel" id="event_info">
+      </div> -->
+      <!-- <div title="Show panel" id="event_info">
         <p>Event Info</p>
-      </div>
+      </div> -->
     </div>
-    <div id="info">
+    <!-- <div id="info">
       <img src="/static/images/info.png" id="info_png">
+<<<<<<< HEAD
+      <p id="info_txt">Created by Brian Gapinske, Aaron Plave, and Justin Raymond during WesHack Fall 2013</p>
+    </div> -->
+=======
       <p id="info_txt">Created by Brian Gapinski, Aaron Plave, and Justin Raymond during WesHack Fall 2013</p>
     </div>
+>>>>>>> 5dac1f7c1f66e01410a00a9dd54fdb6297e3949d
   </body>
 </html>
 

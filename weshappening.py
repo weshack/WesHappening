@@ -106,8 +106,9 @@ def index():
   locations = serialize(Location.query.all())
   #events = ['option_1','option_2','option_3','option_4']
   events = serialize_events(Event.query.all())
+  events2 = Event.query.all()
   categories = ['cat 1','cat 2','cat 3']
-  return render_template("index.html", locations = locations, events = events, categories = categories)
+  return render_template("index.html", locations = locations, events = events, events2=events2,categories = categories)
 
 
 def add_event(event):
