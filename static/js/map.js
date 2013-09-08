@@ -87,11 +87,11 @@ function initialize() {
   /*
    * Makes search bars pretty using the chosen framework
    */
-  $("#event_search").chosen({no_results_text: "Nothing Happening :(", placeholder_text_multiple: "Search for events by name."});
+  $("#event_search").chosen({no_results_text: "Nothing Happening :(", placeholder_text_multiple: "Search for events by name.", max_selected_options: 1});
 
-  $("#category_search").chosen({no_results_text: "No categories found :(", placeholder_text_multiple: "Filter by event category"});
+  $("#category_search").chosen({no_results_text: "No categories found :(", placeholder_text_multiple: "Filter by event category", max_selected_options: 2});
 
-  $("#location_search").chosen({no_results_text: ":(", placeholder_text_multiple: "Filter event by location"});
+  $("#location_search").chosen({no_results_text: ":(", placeholder_text_multiple: "Filter event by location", max_selected_options: 2});
 
 
 google.maps.event.addListener(map,'center_changed',function() { 
