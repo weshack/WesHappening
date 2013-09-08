@@ -5,7 +5,7 @@ import simplejson
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/events.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///events.db'
 db = SQLAlchemy(app)
 
 cats = {0: "Auditions",  1: "Theater", 2: "Sports", 
