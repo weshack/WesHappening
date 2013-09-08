@@ -26,11 +26,6 @@ body {
   -webkit-border-radius: 15px;
   opacity: 0.5;
 }
-#even_info:hover {
-  opacity: 1;
-  width: 200px;
-  height: 600px;
-}
 
 #event_search {
   width:400px;
