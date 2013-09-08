@@ -6,9 +6,12 @@ import datetime
 from weshappening import add_event
 from get_data import xml_parser
 from time import sleep
+import logging
 
-f = file.open("/var/log/weshappening.log", "w+")
-f.write("Adding events")
+
+logging.basicConfig(filename='weshappening.log', level=logging.DEBUG,
+                        format="%(asctime)s: %(message)s")
+logging.debug("Updating events")
 
 feed_url = "http://events.wesleyan.edu/events/cal_rss_today"
 
@@ -97,5 +100,4 @@ for item in wesleying_feed:
     #print event,"EVENT"
     add_event(event)
 
-f.write("events added!")
-f.close()
+logging.debug("Events updated!")
