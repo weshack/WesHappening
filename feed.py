@@ -52,15 +52,17 @@ for item in feed["items"]:
 
 ##FOR WESLEYING
 ite = 0
-for item in wesleying_feed[0:1]:
+for item in wesleying_feed:
     name = str(item["title"])
     date = str(item["date"])
     time = re.search("(TBA|\d\d:\d\d (a|p)m( - \d\d:\d\d (a|p)m)*)", str(item['time']))
     time = item["time"]
     #this removes some unicode characters that I can't
     #seem to convert to ascii. Therefore grammar=messy
-    desc = item['description'][:20]#.encode('ascii','ignore')
-    loc = str(item["location"][0]) #0 for now..()
+    desc = item['description'].encode('ascii','ignore')
+    loc = item["location"]
+    if loc:
+        loc = str(loc[0].encode('ascii','ignore'))
 
     #print loc
     link = str(item['url'])
