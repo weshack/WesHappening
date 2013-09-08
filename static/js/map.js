@@ -40,21 +40,32 @@ function initialize() {
         infowindow.close();
     });
 
-    google.maps.event.addListener(marker,'mouseover',function() {
-      infowindow.open(map,marker);
-    });
+    // google.maps.event.addListener(marker,'mouseover',function() {
+    //   infowindow.open(map,marker);
+    // });
 
     google.maps.event.addListener(marker,'click',function() {
+      InfoWindow.close();
       infowindow.open(map,marker);
     });
 
-    google.maps.event.addListener(marker,'mouseout',function() {
-      infowindow.close();
-    });
+    // google.maps.event.addListener(marker,'clockout',function() {
+    //   infowindow.close();
+    // });
 
     oms.addMarker(marker);
 
 
+// <<<<<<< HEAD
+//     $(window).on('hashchange', function() {
+      
+//       });
+//     window.onload = function(){
+//           infowindow.open(map,marker);
+        
+//     }
+// =======
+// >>>>>>> 3576d40e752eafdb28d88099cacd4e8d5377d580
 
     return marker;
   }

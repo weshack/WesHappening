@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
 
     <link rel="stylesheet" href="/static/css/app.css" type="text/css">
     <link rel="stylesheet" href="/static/css/chosen.min.css" type="text/css">
@@ -12,7 +12,7 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="static/js/chosen.jquery.min.js"></script>
     <script type="text/javascript" src="static/js/oms.min.js"></script>
-
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
 
     <script type="text/javascript" src="/static/js/app.js"></script>
     <script type="text/javascript">
@@ -24,7 +24,7 @@
 
   </head>
   <body>
-    <div class="span2" id="sidebar"> 
+    <div class="span2 visible-desktop" id="sidebar"> 
       <div class="well" id="events_well">
       <h3 id="sidebar_title">
         Events
@@ -49,8 +49,7 @@
       </div>
     </div>
     </div>
-    <div class="span10 offset3" style="padding-right:0px;
-    padding-left:0%; height:100%;margin-left: 0px;width: 75%;">
+    <div class="span10 offset3" id="map_area">
     <!-- <div class="span12"> -->
       <div id="map-canvas"></div>
       <!-- <div id="search_bar">
