@@ -45,7 +45,6 @@ function initialize() {
     // });
 
     google.maps.event.addListener(marker,'click',function() {
-      InfoWindow.close();
       infowindow.open(map,marker);
     });
 
@@ -98,10 +97,8 @@ function initialize() {
   // Adds a hover listener to all the rows in the event table
   $(".event_name").each(function() {
     var index = $(this).closest("tr").index();
-    $(this).hover(function(){
-      google.maps.event.trigger(markers[index-1],"mouseover");
-    }, function(){
-      google.maps.event.trigger(markers[index-1],"mouseout");
+    $(this).click(function(){
+      google.maps.event.trigger(markers[index-1],"click");
     });
   });
 
