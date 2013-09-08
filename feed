@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 import feedparser
 import re
 import datetime
@@ -59,7 +61,7 @@ for item in wesleying_feed:
     time = item["time"]
     #this removes some unicode characters that I can't
     #seem to convert to ascii. Therefore grammar=messy
-    desc = item['description'].encode('ascii','ignore')
+    desc = item['description'].encode('ascii','ignore')[:75]
     loc = item["location"]
     if loc:
         loc = str(loc[0].encode('ascii','ignore'))
