@@ -66,10 +66,9 @@ function initialize() {
     if ((events[i].lat) != 0.0 && (events[i].lon) != 0.0) {
 
       var content_str = '<div id="content">'+
-        '<h3 id="firstHeading" class="firstHeading">' + events[i].name + '</h1>'+
+        '<a href="' + events[i].link + '" id="firstHeading" class="firstHeading">' + events[i].name + '</a>'+
         '<div id="bodyContent">'+
         '<p>' + events[i].desc + '</p>' +
-        '<a href="' + events[i].link + '">Link</a>' +
         '</div>'+
         '</div>';
 
