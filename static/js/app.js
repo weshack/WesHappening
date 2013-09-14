@@ -29,7 +29,7 @@ function parse_events(event_str) {
     obj.lat = lat_match[1];
     obj.lon = lon_match[1];
 
-    events.push(obj);
+    events.push(obj)
   }
 
   return events
