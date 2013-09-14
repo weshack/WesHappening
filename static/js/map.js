@@ -120,5 +120,21 @@ function initialize() {
       map.setCenter(new google.maps.LatLng(Y,X));
     }
   });
+
+  /* Logic for instant search of events list
+   */
+  $("#search_input").keyup(function(event) {
+    console.log(this.value);
+    console.log(event);
+    var search_re = new RegExp(this.value,"i");
+    $("#events_tb").children("tr").each(function() {
+      if (search_re.test($(this).children("td").first().attr("id"))) {
+        // The event matches the search, so we keep it in the DOM
+      }
+      else {
+        $(this).remove()
+      }
+    });
+  });
 }
 google.maps.event.addDomListener(window, 'load', initialize);

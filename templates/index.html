@@ -37,36 +37,38 @@
       <div class="well" id="events_well">
         <div id="head">
           <img align="middle" id="logo" src="/static/images/logo.png" alt="Logo" />
-        
-          <h3 id="sidebar_title" href="/">
-            WesHappening
-          </h3>
-          </div>
-      <table class="table table-striped" id="events_table">
-        <thread>
-          <tr>
-            <th>Name</th>
-            <th>Time</th>
-          </tr>
-        </thread>
-        <tbody>
-          {% for i in events2 %}
+          <h3 id="sidebar_title" href="/">WesHappening</h3>
+        </div>
+        <div id="search_div">
+          <form id="search_form">
+            <label id="search_label" for="search_bar"></label>
+            <input type="text" id="search_input" placeholder="See what's happening!">
+          </form>
+        </div>
+        <table class="table table-striped" id="events_table">
+          <thread>
             <tr>
-              <td id="{{i.name}}" style="width: 50%;" class="event_name"><a href="#{{ i.name }}">{{i.name}}</a></td>
-              <td style="width: 50%;">{{i.time}}</td>
+              <th>Name</th>
+              <th>Time</th>
             </tr>
-          {% endfor %}
-
-        </tbody>
-      </table>
-      <div>
-        This site was created by 
+          </thread>
+          <tbody id="events_tb">
+            {% for i in events2 %}
+              <tr>
+                <td id="{{i.name}}" style="width: 50%;" class="event_name"><a href="#{{ i.name }}">{{i.name}}</a></td>
+                <td style="width: 50%;">{{i.time}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div>
+          This site was created by 
+        </div>
       </div>
     </div>
-    </div>
     <div class="span10 offset3" id="map_area">
-      <div id="map-canvas"></div>
-    </div>
+      <div id="map-canvas">
+      </div>
     </div>
   </body>
 </html>
