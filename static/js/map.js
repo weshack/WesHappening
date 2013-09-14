@@ -24,7 +24,11 @@ function initialize() {
   map.setOptions({styles: styles_array});
     
   /* spreads out markers that are close */
-  var oms = new OverlappingMarkerSpiderfier(map);
+  var oms = new OverlappingMarkerSpiderfier(map, 
+        {
+            markersWontHide: true,
+            keepSpiderfied: true
+        });
 
   /*a Adds markers for all events in 'events' to the map
    */
@@ -41,12 +45,6 @@ function initialize() {
     var infowindow = new google.maps.InfoWindow({
       content: content_str,
     });
-
-    oms.addListener('spiderfy', function(markers) {
-        infowindow.close();
-    });
-
-    
 
     google.maps.event.addListener(marker,'click',function() {
       infowindow.open(map,marker);
