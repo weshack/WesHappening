@@ -47,9 +47,12 @@ function initialize() {
     });
 
     
-
     google.maps.event.addListener(marker,'click',function() {
       infowindow.open(map,marker);
+    });
+
+    google.maps.event.addListener(map,'click',function() {
+      infowindow.close();
     });
 
     oms.addMarker(marker);
