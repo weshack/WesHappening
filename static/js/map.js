@@ -50,6 +50,10 @@ function initialize() {
       infowindow.open(map,marker);
     });
 
+    google.maps.event.addListener(map,'click',function() {
+      infowindow.close();
+    });
+
     oms.addMarker(marker);
 
     return marker;
