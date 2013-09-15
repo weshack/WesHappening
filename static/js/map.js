@@ -129,7 +129,7 @@ function initialize() {
   var removed = [];
   $("#search_input").keyup(function(event) {
     var search_re = new RegExp(this.value,"i");
-    $("#events_tb").children("tr").each(function() {
+    $("#events_tb").children("tr").each(function(index) {
       var event_name = $(this).children("td").first().attr("id");
       if (!search_re.test(event_name)) {
         var obj = Object.create(null);
@@ -142,6 +142,7 @@ function initialize() {
             //obj.desc = events[i].desc;
             //obj.lat = events[i].lat;
             //obj.lon = events[i].lon;
+            obj.index = index;
           }
         } 
         removed.push(obj);
