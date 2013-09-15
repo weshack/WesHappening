@@ -124,12 +124,18 @@ function initialize() {
   /* Logic for instant search of events list
    */
   $("#search_input").keyup(function(event) {
+    var removed = [];
     var search_re = new RegExp(this.value,"i");
     $("#events_tb").children("tr").each(function() {
       if (search_re.test($(this).children("td").first().attr("id"))) {
         // The event matches the search, so we keep it in the DOM
       }
       else {
+        var elem = $(this).children("td").first();
+        var obj = Object.create(null, {
+          name: elem.attr("id")
+        });
+        removed.push(removed);
         $(this).remove()
       }
     });
