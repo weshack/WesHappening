@@ -16,10 +16,11 @@ function parse_events(event_str) {
     var lat_match = lat_re.exec(arr[i]);
     var lon_match = lon_re.exec(arr[i]);
     
-    var obj = new Object();
+    var obj = Object.create(null);
     obj.cat = cat_match[1];
     obj.link = link_match[1];
     obj.name = name_match[1];
+
     if (desc_match) {
         obj.desc = desc_match[1];
     }

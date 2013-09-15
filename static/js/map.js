@@ -121,24 +121,40 @@ function initialize() {
     }
   });
 
-  /* Logic for instant search of events list
+  /* Logic for instant search of events list. It removes events
+   * that do not match the search bar from the DOM and keeps
+   * them in an array. It adds them back into the DOM when the
+   * do match the text in the search bar.
    */
+  var removed = [];
   $("#search_input").keyup(function(event) {
-    var removed = [];
     var search_re = new RegExp(this.value,"i");
     $("#events_tb").children("tr").each(function() {
-      if (search_re.test($(this).children("td").first().attr("id"))) {
-        // The event matches the search, so we keep it in the DOM
-      }
-      else {
-        var elem = $(this).children("td").first();
-        var obj = Object.create(null, {
-          name: elem.attr("id")
-        });
-        removed.push(removed);
+      var event_name = $(this).children("td").first().attr("id");
+      if (!search_re.test(event_name)) {
+        var obj = Object.create(null);
+        for(var i=0;i<events.length;i++) {
+          if (event_name === events[i].name) {
+            //obj.cat = events[i].cat;
+            //obj.link = events[i].link;
+            obj.time = $(this).children("td").last().html();
+            obj.name = events[i].name;
+            //obj.desc = events[i].desc;
+            //obj.lat = events[i].lat;
+            //obj.lon = events[i].lon;
+          }
+        } 
+        removed.push(obj);
         $(this).remove()
       }
     });
+    for (var i=0;i<removed.length;i++) {
+      var obj = removed[i];
+      if (search_re.test(obj.name)) {
+        $("#events_tb").append('<tr><td id="' + obj.name + '" style="width: 50%;" class="event_name"><a href="' + obj.name + '">' + obj.name + '</a></td><td style="width: 50%;">' + obj.time + '</td></tr>');
+        removed.splice(i,1);
+      }
+    }
   });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
