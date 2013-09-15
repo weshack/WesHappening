@@ -44,6 +44,8 @@ def content_parser(content,identifiers):
     Content is a list of words and identifiers is a dict of lists
     """
 
+
+    ########ADD FILTERING TO GRAB EVENTS ONLY ###########
   
     # content = [u'1962.', u'USA.', u'Dir:', u'John', u'Ford.', u'With', u'James', u'Stewart,', u'John', u'Wayne.', u'123', u'min.', u'In', u'a', u'town', u'terrorized', u'by', u'the', u'titular', u'outlaw,', u'an', u'educated', u'lawyer', u'and', u'an', u'individualistic', u'frontiersman', u'strike', u'up', u'uneasy', u'friendship', u'in', u'the', u'name', u'of', u'peace', u'and', u'progress.', u'Western', u'master', u'Ford', u'uses', u'flashbacks', u'to', u'detail', u'a', u'thrilling,', u'cynically', u'self-reflexive', u'commentary', u'on', u'American', u'mythology.', u'Tonight.', u'8pm.', u'Goldsmith', u'Family', u'Cinema.', u'Free.']
     # content = [u'\n', u'From ', u'Keenan Burgess\u201916', u':', u'\n', u'Electronic up-and-comer ', u'Druid Cloak\u2019s', u' coming to Psi U this Saturday for the first party/concert of the fall semester. Wes\u2019 own Ron Beatz and cone+ will be opening.', u'\n', u'Date:', u' Sat, Sept 7', u'\n', u'Time: \xa0', u'9 pm- 2 am', u'\n', u'Place:', u' Psi U', u'\n', u'Cost:', u' FREE', u'\n', u'FB Event.', u'\n']
