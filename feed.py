@@ -85,7 +85,7 @@ for item in wesleying_feed:
         print "COULD NOT GET A DATE_TIME"
         desc = item['description']
         date_time = datetime.datetime.today()
-    # print date_time
+    print date_time
 
     #match -- [ September 14, 2013; 8:00 PM.
     time = re.search("(:?january|february|march|april|may|june|july|august|september|october|november|december).*\d{1,2}, .*\d{4}.*; \d{1,2}:\d{2}.*to.*\d{1,2}:\d{2}.*(a|p)m(.|;)",date_time)
@@ -99,26 +99,32 @@ for item in wesleying_feed:
     if loc:
         ##ADD FOSS HILL TO BUILDINGS.TXT ?
         loc = u_to_string(loc[0]).strip().replace("$","s")
-        # print "LOCATION",loc
+        print "LOCATION",loc
     else:
         print "NO LOCATION"
     link = str(item['url'])
+    # print link
 
-    try:
+    times = []
+    for t in time:
+        month = t[0].capitalize()
+        day = t[1]
+        year = t[3]
+        start = t[4]
+        if t[5] == "pm" and start != 12
 
-        if len(time) > 1:
-            t = time[0].split(":")
-            if (time[1] == "pm") and not (int(t[0]) == 12):
-                dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), (int(t[0])+12)%24, int(t[1]))
-            elif (int(t[0]) == 12) and (t[1] == ("am")):
-                dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), 0, int(t[1]))
-            else:
-                dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), int(t[0]), int(t[1]))
+    if len(time) > 1:
+        t = time[0].split(":")
+        if (time[1] == "pm") and not (int(t[0]) == 12):
+            dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), (int(t[0])+12)%24, int(t[1]))
+        elif (int(t[0]) == 12) and (t[1] == ("am")):
+            dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), 0, int(t[1]))
         else:
-            dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]))
-    except:
-    #    print "nope"
-        pass
+            dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), int(t[0]), int(t[1]))
+    else:
+        dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]))
+
+
     cat = ite % 4
     ite += 1
     
@@ -126,7 +132,7 @@ for item in wesleying_feed:
             "link": link, "description": desc, "category":cat}
 
     #print event,"EVENT"
-    add_event(event)
+    # add_event(event)
     sleep(1)
 
 # logging.debug("Events updated!")

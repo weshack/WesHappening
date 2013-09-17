@@ -28,10 +28,10 @@ function initialize() {
       },{ "featureType": "landscape.man_made", 
       "elementType": "geometry.fill", 
       "stylers": [ 
-        { "weight": 0.1 },
-        { "hue": "#00ffe6" }, 
-        { "saturation": 2 }, 
-        { "lightness": 89 } ] 
+        { "color": "#808080" }, 
+        { "saturation": -56 }, 
+        { "lightness": 78 },
+        { "gamma":1} ] 
       },{ "featureType": "poi.sports_complex", 
       "elementType": "geometry.fill", 
       "stylers": [
@@ -44,7 +44,7 @@ function initialize() {
       },{ "featureType": "road.local", 
       "elementType": "geometry.fill", 
       "stylers": [ 
-        { "color": "#253538" }, 
+        { "color": "#E2FFF3" }, 
         { "gamma": 0.72 }, 
         { "lightness": 89 }, 
         { "saturation": -100 } ] 
@@ -59,7 +59,7 @@ function initialize() {
       },{ "featureType": "road.arterial",
       "elementType": "geometry.fill", 
       "stylers": [ 
-        { "color": "#253538" }, 
+        { "color": "#E2FFF3" }, 
         { "gamma": 0.72 }, 
         { "lightness": 89 }, 
         { "saturation": -100 } ] 
