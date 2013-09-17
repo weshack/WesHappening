@@ -92,10 +92,12 @@ for item in wesleying_feed:
     if not time:
         time = re.search("(:?january|february|march|april|may|june|july|august|september|october|november|december).*\d{2}, .*\d{4}.*; \d{1}:\d{2}.*(a|p)m(;|.)",date_time)
     if time:
-        print "TIME!!",[i.split() for i in time.group().split(".") if i.split()]
+        time = [i.split() for i in time.group().split(".") if i.split()]
+        print "TIME!!",time
     else:
         print "NO TIME"
     loc = item["location"]
+    print "LOOOO",loc
     if loc:
         ##ADD FOSS HILL TO BUILDINGS.TXT ?
         loc = u_to_string(loc[0]).strip().replace("$","s")
@@ -106,32 +108,66 @@ for item in wesleying_feed:
     # print link
 
     times = []
-    for t in time:
-        month = t[0].capitalize()
-        day = t[1]
-        year = t[3]
-        start = t[4]
-        if t[5] == "pm" and start != 12
+    if time:
+        for t in time:
+            #this catches the weird cases where the next time is a dupe and is 
+            # messed up and has no month. 
+            if str(t[0]).count(":") == 0:
+                month = t[0]
+                try:
+                    day = int(t[1].split(",")[0])
+                except ValueError:
+                    day = int(t[1])
+                year = int(t[2].split(";")[0])
+                z = t[3].split(":")
+                hour = int(z[0])
+                minutes = int(z[1])
 
-    if len(time) > 1:
-        t = time[0].split(":")
-        if (time[1] == "pm") and not (int(t[0]) == 12):
-            dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), (int(t[0])+12)%24, int(t[1]))
-        elif (int(t[0]) == 12) and (t[1] == ("am")):
-            dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), 0, int(t[1]))
-        else:
-            dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]), int(t[0]), int(t[1]))
-    else:
-        dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]))
+                if t[4] == "pm" and not hour == 12:
+                    start_dt = datetime.datetime(year,datetime.datetime.strptime(month,"%B").month,
+                        day,hour+12,minutes)
+                elif t[4] == "am" and hour == 12:
+                    start_dt = datetime.datetime(year,datetime.datetime.strptime(month,"%B").month,
+                        day,0,minutes)
+                else:
+                    start_dt = datetime.datetime(year,datetime.datetime.strptime(month,"%B").month,
+                        day,hour,minutes)
 
+                #End time case will be -1 for now
+                try:
+                    if t[5] == "to":
+                        z = t[6].split(":")
+                        hour = int(z[0])
+                        minutes = int(z[1])
+
+                        if t[7] == "pm" and not hour == 12:
+                            end_dt = datetime.datetime(year,datetime.datetime.strptime(month,"%B").month,
+                                day,hour+12,minutes)
+                        elif t[7] == "am" and hour == 12:
+                            end_dt = datetime.datetime(year,datetime.datetime.strptime(month,"%B").month,
+                                day,0,minutes)
+                        else:
+                            end_dt = datetime.datetime(year,datetime.datetime.strptime(month,"%B").month,
+                                day,hour,minutes)
+                    else:
+                        end_dt = -1
+
+                except IndexError:
+                    print "NO END TIME IN THIS TIME",t
+                    end_dt = -1
+
+                print start_dt,"to",end_dt
+                times.append((start_dt,end_dt))
+
+        print times
 
     cat = ite % 4
     ite += 1
     
-    event = {"name": name, "location": loc, "time": datetime.datetime.today() , 
+    event = {"name": name, "location": loc, "time": times, 
             "link": link, "description": desc, "category":cat}
 
-    #print event,"EVENT"
+    print event,"EVENT"
     # add_event(event)
     sleep(1)
 
