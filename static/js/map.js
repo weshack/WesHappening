@@ -1,3 +1,5 @@
+var map;
+var infowindow;
 function initialize() {
 
   var styles_array = 
@@ -84,13 +86,15 @@ function initialize() {
   /*a Adds markers for all events in 'events' to the map
    */
   var markers = [];
+  var currentIW = null;
+  var infoWindow = new google.maps.InfoWindow();
 
   function markerize(pos, name, str) {
     var marker = new google.maps.Marker({
         position: pos,
         map: map,
-        //title: name,
     });
+
     marker.id = name;
 
     var infowindow = new google.maps.InfoWindow({
@@ -98,7 +102,11 @@ function initialize() {
     });
 
     google.maps.event.addListener(marker,'click',function() {
+      if (currentIW != null) {
+        currentIW.close();
+      }
       infowindow.open(map,marker);
+      currentIW = infowindow
     });
 
     google.maps.event.addListener(map,'click',function() {
