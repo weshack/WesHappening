@@ -191,30 +191,12 @@ function initialize() {
     $("#events_tb").children("tr").each(function(index) {
       var event_name = $(this).children("td").first().attr("id");
       if (!search_re.test(event_name)) {
-        var obj = Object.create(null);
-        for(var i=0;i<events.length;i++) {
-          if (event_name === events[i].name) {
-            //obj.cat = events[i].cat;
-            //obj.link = events[i].link;
-            obj.time = $(this).children("td").last().html();
-            obj.name = events[i].name;
-            //obj.desc = events[i].desc;
-            //obj.lat = events[i].lat;
-            //obj.lon = events[i].lon;
-            obj.index = index;
-          }
-        } 
-        removed.push(obj);
-        $(this).remove()
+        $(this).hide();
+      }
+      else {
+        $(this).show();
       }
     });
-    for (var i=0;i<removed.length;i++) {
-      var obj = removed[i];
-      if (search_re.test(obj.name)) {
-        $("#events_tb").append('<tr><td id="' + obj.name + '" style="width: 50%;" class="event_name"><a href="' + obj.name + '">' + obj.name + '</a></td><td style="width: 50%;">' + obj.time + '</td></tr>');
-        removed.splice(i,1);
-      }
-    }
   });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
