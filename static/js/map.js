@@ -1,17 +1,68 @@
 function initialize() {
 
   var styles_array = 
-  [
-    {
-     "elementType": "geometry",
-                    "stylers": [{ "hue": "#00e5ff" }]
-    },
-    {
+  [ 
+    { 
       "featureType": "poi.school",
-      "stylers": [{ "hue": "#ff0000" }]
-    },
-    {}
-  ];
+      "stylers": [ 
+        { "hue": "#91ff00" }, 
+        { "saturation": 43 }, 
+        { "lightness": -5 }, 
+        { "gamma": 0.99 }, 
+        { "visibility": "on" } 
+        ] 
+      },{ "featureType": "poi.park", 
+      "elementType": "geometry", 
+      "stylers": [
+         { "hue": "#3bff00" }, 
+         { "saturation": 30 } ] 
+       },{ "featureType": "water", 
+       "elementType": "geometry.fill", 
+       "stylers": [ 
+        { "hue": "#00bbff" },
+        { "gamma": 0.85 }, 
+        { "saturation": -31 }, 
+        { "lightness": -43 } ] 
+      },{ "featureType": "landscape.man_made", 
+      "elementType": "geometry.fill", 
+      "stylers": [ 
+        { "weight": 0.1 },
+        { "hue": "#00ffe6" }, 
+        { "saturation": 2 }, 
+        { "lightness": 89 } ] 
+      },{ "featureType": "poi.sports_complex", 
+      "elementType": "geometry.fill", 
+      "stylers": [
+        { "visibility": "on" }, 
+        { "weight": 0.7 }, 
+        { "gamma": 0.64 }, 
+        { "hue": "#e6ff00" }, 
+        { "saturation": -39 }, 
+        { "lightness": -5 } ] 
+      },{ "featureType": "road.local", 
+      "elementType": "geometry.fill", 
+      "stylers": [ 
+        { "color": "#253538" }, 
+        { "gamma": 0.72 }, 
+        { "lightness": 89 }, 
+        { "saturation": -100 } ] 
+       },{ "featureType": "road.local", 
+       "elementType": "geometry.stroke", 
+       "stylers": [
+        { "saturation": -49 },
+        { "lightness": -50 },
+        { "visibility": "on" }, 
+        { "color": "#ab8080" }, 
+        { "weight": 0.2 } ] 
+      },{ "featureType": "road.arterial",
+      "elementType": "geometry.fill", 
+      "stylers": [ 
+        { "color": "#253538" }, 
+        { "gamma": 0.72 }, 
+        { "lightness": 89 }, 
+        { "saturation": -100 } ] 
+      }
+      ];
 
   var mapOptions = {
     center: new google.maps.LatLng(41.5526833,-72.6612454),
