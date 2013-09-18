@@ -83,6 +83,7 @@ def query_name(pattern, d):
         for p in patterns:
             match = []
             for loc in locs:
+                print loc
                 if not (loc.name.find(p) == -1):
                     match.append(loc)
             if len(match) > 0:

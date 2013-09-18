@@ -59,6 +59,22 @@ wesleying_feed = xml_parser()
 def u_to_string(string):
     return eval('"' + string.replace('"','') + '"')
 
+
+def no_unicode(string):
+    lst = list(string)
+    lst2 = lst[:]
+    ite = 0
+    for i in lst:
+        try:
+            str(i)
+        except:
+            print "some damn unicode still in here"
+            print ite,lst2[ite],lst2
+            lst2.pop(ite)
+        ite += 1
+    return "".join(lst2)
+
+
 ##FOR WESLEYING
 ite = 0
 # print wesleying_feed
@@ -76,8 +92,6 @@ for item in wesleying_feed:
     #     print time,"HAVE TIME"
     # else:
     #     print "NO TIME"
-    #this removes some unicode characters that I can't
-    #seem to convert to ascii. Therefore grammar=messy
     try:
         date_time,desc = item['description'].split("]",1)
         date_time = date_time.lower()
@@ -100,7 +114,7 @@ for item in wesleying_feed:
     print "LOOOO",loc
     if loc:
         ##ADD FOSS HILL TO BUILDINGS.TXT ?
-        loc = u_to_string(loc[0]).strip().replace("$","s")
+        loc = no_unicode(no_unicode(loc[0]).strip().replace("$","s"))
         print "LOCATION",loc
     else:
         print "NO LOCATION"
@@ -149,7 +163,7 @@ for item in wesleying_feed:
                         else:
                             end_dt = datetime.datetime(year,datetime.datetime.strptime(month,"%B").month,
                                 day,hour,minutes)
-                    else:
+                    else: 
                         end_dt = -1
 
                 except IndexError:
@@ -163,12 +177,14 @@ for item in wesleying_feed:
 
     cat = ite % 4
     ite += 1
-    
-    event = {"name": name, "location": loc, "time": times, 
+
+    if not times:
+        times = [[datetime.datetime.today()]]
+    event = {"name": name, "location": loc, "time": times[0][0], 
             "link": link, "description": desc, "category":cat}
 
     print event,"EVENT"
-    # add_event(event)
+    add_event(event)
     sleep(1)
 
 # logging.debug("Events updated!")
