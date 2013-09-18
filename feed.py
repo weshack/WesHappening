@@ -183,7 +183,6 @@ for item in wesleying_feed:
     event = {"name": name, "location": loc, "time": times[0][0], 
             "link": link, "description": desc, "category":cat}
 
-    print event,"EVENT"
     add_event(event)
     sleep(1)
 
