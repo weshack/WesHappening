@@ -6,8 +6,12 @@ f = open("buildings.txt", "r")
 data = simplejson.load(f)
 
 for key in data:
-    name = key
-    addr = data[key]
-    location = Location(name, name, addr)
-    db.session.add(location)
-    db.session.commit()
+	try:
+		name = key
+		addr = data[key]
+		location = Location(name, name, addr)
+		db.session.add(location)
+		db.session.commit()
+	except:
+		print "DUPLICATE"
+		pass

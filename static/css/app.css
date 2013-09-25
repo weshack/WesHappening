@@ -72,7 +72,7 @@ body {
   width: 30%;
   height:100%;
   margin-left:0px;
-  background-color:#F7E4E4;
+  /*background-color:#F7E4E4;*/
 }
 
 .table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
@@ -113,7 +113,7 @@ background-color: rgba(19, 133, 155, 0.14) !important;
   padding-right: 8px;
   padding-bottom: 0px;
   margin-bottom: 0px;
-  background-color:#F7E4E4;
+  /*background-color:#F7E4E4;*/
 }
 #event_search {
   width:400px;

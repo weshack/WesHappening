@@ -20,16 +20,17 @@ def no_unicode(string):
         try:
             str(i)
         except:
-            print "some damn unicode still in here"
-            print ite,lst2[ite],lst2
+            # print "some damn unicode still in here"
+            # print ite,lst2[ite],lst2
             lst2.pop(ite)
         ite += 1
     return "".join(lst2)
 
-# path = "/var/www/weshappening/weshappening/weshappening.log"
-# logging.basicConfig(filename=path, level=logging.DEBUG,
-#                         format="%(asctime)s: %(message)s")
-# logging.debug("Updating events")
+path = "/var/www/weshappening/weshappening/weshappening.log"
+# path = "weshappening.log"
+logging.basicConfig(filename=path, level=logging.DEBUG,
+                        format="%(asctime)s: %(message)s")
+logging.debug("Updating events")
 
 feed_url = "http://events.wesleyan.edu/events/cal_rss_today"
 
@@ -69,7 +70,7 @@ for item in feed["items"]:
 
     cat = ite % 4
     ite += 1
-
+    print loc,"WESEVENT LOC"
     event = {"name": name, "location": loc, "time": dt, "link": link, "description": desc, "category":cat}
 
     add_event(event)
@@ -91,23 +92,23 @@ for item in wesleying_feed:
     except:
         print "COULD NOT GET A DATE_TIME"
         desc = no_unicode(item['description'])
-        date_time = datetime.datetime.today()
-    print date_time
-    print desc
+        date_time = str(datetime.datetime.today())
+    # print date_time,"DATETIME",type(datetime)
+    # print desc
     time = re.search("(:?january|february|march|april|may|june|july|august|september|october|november|december).*\d{1,2}, .*\d{4}.*; \d{1,2}:\d{2}.*to.*\d{1,2}:\d{2}.*(a|p)m(.|;)",date_time)
     if not time:
         time = re.search("(:?january|february|march|april|may|june|july|august|september|october|november|december).*\d{2}, .*\d{4}.*; \d{1}:\d{2}.*(a|p)m(;|.)",date_time)
     if time:
         time = [i.split() for i in time.group().split(".") if i.split()]
-        print "TIME!!",time
+        # print "TIME!!",time
     else:
         print "NO TIME"
     loc = item["location"]
-    print "LOOOO",loc
+    # print "LOOOO",loc
     if loc:
         ##ADD FOSS HILL TO BUILDINGS.TXT ?
         loc = no_unicode(no_unicode(loc[0]).strip().replace("$","s"))
-        print "LOCATION",loc
+        # print "LOCATION",loc
     else:
         print "NO LOCATION"
     link = str(item['url'])
@@ -159,23 +160,23 @@ for item in wesleying_feed:
                         end_dt = -1
 
                 except IndexError:
-                    print "NO END TIME IN THIS TIME",t
+                    # print "NO END TIME IN THIS TIME",t
                     end_dt = -1
 
-                print start_dt,"to",end_dt
+                # print start_dt,"to",end_dt
                 times.append((start_dt,end_dt))
 
-        print times
+        # print times
 
     cat = ite % 4
     ite += 1
-
+    print loc," !!WESLEYING LOC"
     if not times:
         times = [[datetime.datetime.today()]]
     event = {"name": name, "location": loc, "time": times[0][0], 
             "link": link, "description": desc, "category":cat}
-    print event
+    # print event
     add_event(event)
     sleep(1)
 
-# logging.debug("Events updated!")
+logging.debug("Events updated!")
