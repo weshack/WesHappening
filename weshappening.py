@@ -136,7 +136,7 @@ def add_event(event):
             loc = location
             if loc.addr == "":
                 lat, lon = (0.0, 0.0)
-            else:pt
+            else:
                 try:
                     lat, lon = Geocoder.geocode(loc.name + ", Middletown, CT, 06457").coordinates
                     print "success on ",name,loc,lat,lon
@@ -150,8 +150,8 @@ def add_event(event):
         #print ev.name, ev.location, ev.lat, ev.lon
         db.session.add(ev)
         db.session.commit()
-    else:
-        print "EXISTS",name,loc
+    # else:
+    #     print "EXISTS",name,loc
        # delete_event(exists.name)
        # add_event(event)
 

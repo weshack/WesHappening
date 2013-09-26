@@ -41,6 +41,7 @@ wesleying_feed = xml_parser()
 
 ite = 0
 for item in feed["items"]:
+    print item
     name = str(item["title"])
     if name.startswith("TBA"):
         name = name[4:]
