@@ -50,9 +50,10 @@ for item in feed["items"]:
     value = item["summary_detail"]["value"].split("<br />")
     value0 = str(no_unicode(value[0]))
     date = re.match("\d\d/\d\d/\d\d\d\d", value0)
-    if date:
+    time = re.search("(TBA|\d\d:\d\d (a|p)m( - \d\d:\d\d (a|p)m)*)", value0)
+    if date.group() and time.group():
         date = date.group().split("/")
-        time = re.search("(TBA|\d\d:\d\d (a|p)m( - \d\d:\d\d (a|p)m)*)", value0).group().split(" ")
+        time = time.group().split(" ")
     
         if len(time) > 1:
             t = time[0].split(":")
