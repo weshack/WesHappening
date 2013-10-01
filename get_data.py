@@ -127,12 +127,46 @@ def get_xml():
     items = dom.getElementsByTagName('item')
     return items
 
+def only_events(posts):
+    """
+    Goes through the category elements in each post and looks
+    for an "event"-like tag. Returns false if no event tag is found.
+    """
+    categories = []
+    actual_events = []
+    for post in posts:
+        cats = post.getElementsByTagName('category')
+        for c in cats:
+            categories.append(c.childNodes[0].data)
+            if "event" in c.childNodes[0].data.lower():
+                if post not in actual_events:
+                    actual_events.append(post)
+            
+    print categories
+    return actual_events,categories
+
+
+
+"""
+Idea:::: could create some lists of possible tags for certain 
+categories in order to identify what kind of event each item is.
+For example, music identifiers could be 
+    [concert, band, a capella, ...]
+Can look through the categories/gather some data to figure out
+what these would be. WANT categories so that we can have
+colored pins on the map and for filtering/searching purposes.
+"""
+
+
+
 
 def xml_parser():
     """FOR WESLEYING"""
-    items = get_xml()
+    all_items = get_xml()
+    print "total items =",len(all_items)
     events = []
-    # print items,"ITEMS"
+    items = only_events(all_items)[0]
+    print "TOTAL ITEMS=",len(items)
     for i in items:
         # print i,"ITEM"
         title = i.getElementsByTagName('title')[0].childNodes[0].data
