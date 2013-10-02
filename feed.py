@@ -15,16 +15,19 @@ def u_to_string(string):
 def no_unicode(string):
     lst = list(string)
     lst2 = lst[:]
+    print lst2
     ite = 0
     for i in lst:
         try:
             str(i)
+            ite += 1
         except:
-            # print "some damn unicode still in here"
-            # print ite,lst2[ite],lst2
+            print "some damn unicode still in here"
+            print ite,lst2[ite],lst2
             lst2.pop(ite)
-        ite += 1
-    return "".join(lst2)
+            print ite,lst2[ite],lst2
+        
+    return ''.join(lst2)
 
 path = "/var/www/weshappening/weshappening/weshappening.log"
 # path = "weshappening.log"
@@ -89,18 +92,23 @@ for item in feed["items"]:
 ite = 0
 # print wesleying_feed
 for item in wesleying_feed:
-    name = item["title"]
+    name = no_unicode(item["title"])
 
     try:
         date_time,desc = item['description'].split("]",1)
-        desc = no_unicode(desc)
+        desc = desc.strip()
         date_time = date_time.lower()
     except:
         print "COULD NOT GET A DATE_TIME"
-        desc = no_unicode(item['description'])
+        desc = item['description'].strip()
         date_time = str(datetime.datetime.today())
+    d1 = list(desc)
+    print d1,type(desc),desc
+    d1 = [i for i in d1 if i != "\n"]
+    print d1,type(d1)
+    desc = "".join(d1)
     # print date_time,"DATETIME",type(datetime)
-    # print desc
+    # print desc,"DESSSSSSSSSCR",type(desc),str(desc)
     time = re.search("(:?january|february|march|april|may|june|july|august|september|october|november|december).*\d{1,2}, .*\d{4}.*; \d{1,2}:\d{2}.*to.*\d{1,2}:\d{2}.*(a|p)m(.|;)",date_time)
     if not time:
         time = re.search("(:?january|february|march|april|may|june|july|august|september|october|november|december).*\d{2}, .*\d{4}.*; \d{1}:\d{2}.*(a|p)m(;|.)",date_time)

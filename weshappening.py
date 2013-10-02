@@ -122,7 +122,6 @@ def add_event(event):
     name = event["name"]
     print "EVENT NAME",name
     exists = Event.query.filter_by(name=name).first()
-    print exists,"HERE"
     if not exists:
         loc = event["location"]
         print "LOCCC",loc
