@@ -148,6 +148,10 @@ def only_events(posts):
 
 
 """
+FOR WESLEYING. Wes events is a little diff, they don't give tags/categories
+in the feed. Could scrape the site every time we update since they
+do give a link to the page which does have tags? Could talk to them too.
+
 Idea:::: could create some lists of possible tags for certain 
 categories in order to identify what kind of event each item is.
 For example, music identifiers could be 
@@ -155,10 +159,26 @@ For example, music identifiers could be
 Can look through the categories/gather some data to figure out
 what these would be. WANT categories so that we can have
 colored pins on the map and for filtering/searching purposes.
+Could go through all the categories and figure out which cat best fits,
+do some sort of max matches = category thing. Could also use description
+as context for guessing but that gets a little more complicated. Might 
+also be worth just talking to Wesleying people and asking them to 
+put in some more generalized categories in their feed. Also better locations.
 """
 
-
-
+cats_tags = {
+'Film':['film','movie','film series'],
+'Auditions':['auditions','seek','try','out'],
+'Theater':['play','see','92','theater','stage','second'],
+'Performances':['dance','slam','poetry','reading','mic','open'],
+'Student Groups':['cause','education','meeting','food','student','group',
+    'student group','queer','?','community','club','sustain','environment',
+    'help','civic','engage','art'],
+'Sports':['football','soccer','baseball','swimming','lacross','basketball',
+    'softball','varsity','tennis'],
+'Admissions':[],
+'Other':[]
+}
 
 def xml_parser():
     """FOR WESLEYING"""
