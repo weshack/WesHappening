@@ -29,7 +29,7 @@ def no_unicode(string):
         
     return ''.join(lst2)
 
-path = "/var/www/weshappening/weshappening/weshappening.log"
+path = "/srv/weshack/WesHappening/weshappening.log"
 # path = "weshappening.log"
 logging.basicConfig(filename=path, level=logging.DEBUG,
                         format="%(asctime)s: %(message)s")
@@ -92,8 +92,10 @@ for item in feed["items"]:
 ite = 0
 # print wesleying_feed
 for item in wesleying_feed:
-    name = no_unicode(item["title"])
-
+    try:
+        name = no_unicode(item["title"])
+    except:
+        continue
     try:
         date_time,desc = item['description'].split("]",1)
         desc = desc.strip()
